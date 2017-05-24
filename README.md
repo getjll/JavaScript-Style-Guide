@@ -1,4 +1,6 @@
-# Airbnb JavaScript Style Guide() {
+根据 [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) 翻译
+
+# JavaScript 风格指南() {
 
 *A mostly reasonable approach to JavaScript*
 
