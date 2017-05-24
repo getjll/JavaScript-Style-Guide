@@ -1,4 +1,6 @@
-根据 [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) 翻译
+用于本人提高代码风格、学习在写代码中的一些坑。
+同时提高自己的英文文档阅读能力！！！！
+强烈建议看原版 => [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 
 # JavaScript 风格指南() {
 
