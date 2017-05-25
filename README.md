@@ -84,18 +84,18 @@
   <a name="types--complex"></a><a name="1.2"></a>
   - [1.2](#types--complex)  **复杂类型**: 使用复杂类型时实际上是访问了一个引用。
 
-   + `object`
-   + `array`
-   + `function`
+    + `object`
+    + `array`
+    + `function`
 
-   ```javascript
+    ```javascript
     const foo = [1, 2];
     const bar = foo;
 
     bar[0] = 9;
 
     console.log(foo[0], bar[0]); // => 9, 9
-  	```
+    ```
 
 **[⬆ 回到顶部](#table-of-contents)**
 
