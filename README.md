@@ -64,7 +64,7 @@
 
   <a name="types--primitives"></a><a name="1.1"></a>
   
-  - [1.1](#types--primitives) **基础**: 使用基础类型时实际上是访问了值。
+  - [1.1](#types--primitives) **基本类型**: 使用基本类型时实际上是访问了值。
 
    + `string`
    + `number`
@@ -83,7 +83,7 @@
 
   <a name="types--complex"></a><a name="1.2"></a>
   
-  - [1.2](#types--complex)  **复杂**: 使用复杂类型时实际上是访问了一个引用。
+  - [1.2](#types--complex)  **复杂类型**: 使用复杂类型时实际上是访问了一个引用。
 
    + `object`
    + `array`
