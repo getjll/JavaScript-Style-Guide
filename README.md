@@ -1,28 +1,31 @@
-用于本人提高代码风格、学习在写代码中的一些坑。
-同时提高自己的英文文档阅读能力！！！！
-强烈建议看原版 => [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+> 用于本人提高代码风格、学习在写代码中的一些坑。
+>
+> 同时提高自己的英文文档阅读能力！！！！
+>
+> 强烈建议看原版 => [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 
 # JavaScript 风格指南() {
 
-*A mostly reasonable approach to JavaScript*
+*更合理的书写 JavaScript*
 
 [![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb.svg)](https://www.npmjs.com/package/eslint-config-airbnb)
 [![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb-base.svg)](https://www.npmjs.com/package/eslint-config-airbnb-base)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/airbnb/javascript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Other Style Guides
- - [ES5 (Deprecated)](https://github.com/airbnb/javascript/tree/es5-deprecated/es5)
+其他风格指南
+
+ - [ES5 (已废弃)](https://github.com/airbnb/javascript/tree/es5-deprecated/es5)
  - [React](react/)
  - [CSS-in-JavaScript](css-in-javascript/)
  - [CSS & Sass](https://github.com/airbnb/css)
  - [Ruby](https://github.com/airbnb/ruby)
 
-## Table of Contents
+## 目录
 
-  1. [Types](#types)
-  1. [References](#references)
-  1. [Objects](#objects)
-  1. [Arrays](#arrays)
+  1. [类型](#types)
+  1. [引用](#references)
+  1. [对象](#objects)
+  1. [数组](#arrays)
   1. [Destructuring](#destructuring)
   1. [Strings](#strings)
   1. [Functions](#functions)
@@ -57,47 +60,50 @@ Other Style Guides
   1. [Contributors](#contributors)
   1. [License](#license)
 
-## Types
+## 类型
 
   <a name="types--primitives"></a><a name="1.1"></a>
-  - [1.1](#types--primitives) **Primitives**: When you access a primitive type you work directly on its value.
+  
+  - [1.1](#types--primitives) **基础**: 使用基础类型时实际上是访问了值。
 
-    + `string`
-    + `number`
-    + `boolean`
-    + `null`
-    + `undefined`
+   + `string`
+   + `number`
+   + `boolean`
+   + `null`
+   + `undefined`
 
-    ```javascript
+   ```javascript
     const foo = 1;
     let bar = foo;
 
     bar = 9;
 
     console.log(foo, bar); // => 1, 9
-    ```
+   ```
 
   <a name="types--complex"></a><a name="1.2"></a>
-  - [1.2](#types--complex)  **Complex**: When you access a complex type you work on a reference to its value.
+  
+  - [1.2](#types--complex)  **复杂**: 使用复杂类型时实际上是访问了一个引用。
 
-    + `object`
-    + `array`
-    + `function`
+   + `object`
+   + `array`
+   + `function`
 
-    ```javascript
+   ```javascript
     const foo = [1, 2];
     const bar = foo;
 
     bar[0] = 9;
 
     console.log(foo[0], bar[0]); // => 9, 9
-    ```
+  	```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 返回顶部](#table-of-contents)**
 
 ## References
 
   <a name="references--prefer-const"></a><a name="2.1"></a>
+  
   - [2.1](#references--prefer-const) Use `const` for all of your references; avoid using `var`. eslint: [`prefer-const`](http://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign.html)
 
     > Why? This ensures that you can't reassign your references, which can lead to bugs and difficult to comprehend code.
@@ -113,6 +119,7 @@ Other Style Guides
     ```
 
   <a name="references--disallow-var"></a><a name="2.2"></a>
+  
   - [2.2](#references--disallow-var) If you must reassign references, use `let` instead of `var`. eslint: [`no-var`](http://eslint.org/docs/rules/no-var.html) jscs: [`disallowVar`](http://jscs.info/rule/disallowVar)
 
     > Why? `let` is block-scoped rather than function-scoped like `var`.
