@@ -66,23 +66,22 @@
   
   - [1.1](#types--primitives) **基本类型**: 使用基本类型时实际上是访问了值。
 
-   + `string`
-   + `number`
-   + `boolean`
-   + `null`
-   + `undefined`
+    + `string`
+    + `number`
+    + `boolean`
+    + `null`
+    + `undefined`
 
-   ```javascript
+    ```javascript
     const foo = 1;
     let bar = foo;
 
     bar = 9;
 
     console.log(foo, bar); // => 1, 9
-   ```
+    ```
 
   <a name="types--complex"></a><a name="1.2"></a>
-  
   - [1.2](#types--complex)  **复杂类型**: 使用复杂类型时实际上是访问了一个引用。
 
    + `object`
@@ -98,40 +97,40 @@
     console.log(foo[0], bar[0]); // => 9, 9
   	```
 
-**[⬆ 返回顶部](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
-## References
+## 引用
 
   <a name="references--prefer-const"></a><a name="2.1"></a>
   
-  - [2.1](#references--prefer-const) Use `const` for all of your references; avoid using `var`. eslint: [`prefer-const`](http://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign.html)
+  - [2.1](#references--prefer-const) 总是使用 `const` 声明引用; 避免 `var`。 eslint: [`prefer-const`](http://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign.html)
 
-    > Why? This ensures that you can't reassign your references, which can lead to bugs and difficult to comprehend code.
+    > 为什么? 这将确保你不能重新分配你的引用，从而导致错误和难以理解的代码.
 
     ```javascript
-    // bad
+    // 坏
     var a = 1;
     var b = 2;
 
-    // good
+    // 好
     const a = 1;
     const b = 2;
     ```
 
   <a name="references--disallow-var"></a><a name="2.2"></a>
   
-  - [2.2](#references--disallow-var) If you must reassign references, use `let` instead of `var`. eslint: [`no-var`](http://eslint.org/docs/rules/no-var.html) jscs: [`disallowVar`](http://jscs.info/rule/disallowVar)
+  - [2.2](#references--disallow-var) 如果必须重新赋值声明，请使用 `let ` 代替 ` var `。 eslint: [`no-var`](http://eslint.org/docs/rules/no-var.html) jscs: [`disallowVar`](http://jscs.info/rule/disallowVar)
 
-    > Why? `let` is block-scoped rather than function-scoped like `var`.
+    > 为什么? 因为 `let` 是块级作用域，而 `var` 是函数作用域。
 
     ```javascript
-    // bad
+    // 坏
     var count = 1;
     if (true) {
       count += 1;
     }
 
-    // good, use the let.
+    // 使用 let 更好.
     let count = 1;
     if (true) {
       count += 1;
@@ -139,10 +138,11 @@
     ```
 
   <a name="references--block-scope"></a><a name="2.3"></a>
-  - [2.3](#references--block-scope) Note that both `let` and `const` are block-scoped.
+  
+  - [2.3](#references--block-scope) 需要注意 `let` 和 `const` 都是块级作用域。
 
     ```javascript
-    // const and let only exist in the blocks they are defined in.
+    // const 和 let 仅生效于定义的代码块内.
     {
       let a = 1;
       const b = 1;
@@ -151,7 +151,7 @@
     console.log(b); // ReferenceError
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 ## Objects
 
