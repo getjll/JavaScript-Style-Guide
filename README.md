@@ -1243,71 +1243,74 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Modules
+## 模块
 
   <a name="modules--use-them"></a><a name="10.1"></a>
-  - [10.1](#modules--use-them) Always use modules (`import`/`export`) over a non-standard module system. You can always transpile to your preferred module system.
+  
+  - [10.1](#modules--use-them) 总是在非标准模块系统上使用模块 (`import`/`export`)。 你可以编译为你喜欢的模块系统。
 
-    > Why? Modules are the future, let's start using the future now.
+    > 为什么? 模块是未来趋势， 让我们现在就拥抱它。
 
     ```javascript
-    // bad
+    // 不好的
     const AirbnbStyleGuide = require('./AirbnbStyleGuide');
     module.exports = AirbnbStyleGuide.es6;
 
-    // ok
+    // 好可以
     import AirbnbStyleGuide from './AirbnbStyleGuide';
     export default AirbnbStyleGuide.es6;
 
-    // best
+    // 更好的方式
     import { es6 } from './AirbnbStyleGuide';
     export default es6;
     ```
 
   <a name="modules--no-wildcard"></a><a name="10.2"></a>
-  - [10.2](#modules--no-wildcard) Do not use wildcard imports.
+  
+  - [10.2](#modules--no-wildcard) 不要使用通配符导出。
 
-    > Why? This makes sure you have a single default export.
+    > 为什么? 这将确保你有一个默认的导出。
 
     ```javascript
-    // bad
+    // 糟糕的
     import * as AirbnbStyleGuide from './AirbnbStyleGuide';
 
-    // good
+    // 好的
     import AirbnbStyleGuide from './AirbnbStyleGuide';
     ```
 
   <a name="modules--no-export-from-import"></a><a name="10.3"></a>
-  - [10.3](#modules--no-export-from-import) And do not export directly from an import.
+  
+  - [10.3](#modules--no-export-from-import) 不要直接在 `export` 上进行导出。
 
-    > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
+    > 为什么? 虽然同行更加简洁，但是有一个明确的 `import` 和 `export` 更加一致。
 
     ```javascript
-    // bad
+    // 这样不太好
     // filename es6.js
     export { es6 as default } from './AirbnbStyleGuide';
 
-    // good
+    // 这样比较好
     // filename es6.js
     import { es6 } from './AirbnbStyleGuide';
     export default es6;
     ```
 
   <a name="modules--no-duplicate-imports"></a>
-  - [10.4](#modules--no-duplicate-imports) Only import from a path in one place.
- eslint: [`no-duplicate-imports`](http://eslint.org/docs/rules/no-duplicate-imports)
-    > Why? Having multiple lines that import from the same path can make code harder to maintain.
+  
+  - [10.4](#modules--no-duplicate-imports) 只在一个地方使用 `import` 导出。 eslint: [`no-duplicate-imports`](http://eslint.org/docs/rules/no-duplicate-imports)
+    > 为什么? 同一模块多行导出更难维护。
 
     ```javascript
-    // bad
+    // 不太好
     import foo from 'foo';
-    // … some other imports … //
+    // … 同时导出额外的 … //
     import { named1, named2 } from 'foo';
 
-    // good
+    // 好
     import foo, { named1, named2 } from 'foo';
 
-    // good
+    // 好
     import foo, {
       named1,
       named2,
@@ -1315,45 +1318,47 @@
     ```
 
   <a name="modules--no-mutable-exports"></a>
-  - [10.5](#modules--no-mutable-exports) Do not export mutable bindings.
+  
+  - [10.5](#modules--no-mutable-exports) 不导出可变绑定。
  eslint: [`import/no-mutable-exports`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-mutable-exports.md)
-    > Why? Mutation should be avoided in general, but in particular when exporting mutable bindings. While this technique may be needed for some special cases, in general, only constant references should be exported.
+    > 为什么? 可变一般应避免，但特别是当导出可变绑定时。虽然这种技术可能需要一些特殊的情况下，一般来说，只有常量引用可以导出。
 
     ```javascript
-    // bad
+    // 糟糕的
     let foo = 3;
     export { foo };
 
-    // good
+    // 好的
     const foo = 3;
     export { foo };
     ```
 
   <a name="modules--prefer-default-export"></a>
-  - [10.6](#modules--prefer-default-export) In modules with a single export, prefer default export over named export.
+  
+  - [10.6](#modules--prefer-default-export) 在单出口的模块中，默认出口多于指定的出口。
  eslint: [`import/prefer-default-export`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/prefer-default-export.md)
 
     ```javascript
-    // bad
+    // 不太好
     export function foo() {}
 
-    // good
+    // 这样可以
     export default function foo() {}
     ```
 
   <a name="modules--imports-first"></a>
-  - [10.7](#modules--imports-first) Put all `import`s above non-import statements.
+  
+  - [10.7](#modules--imports-first)将所有的 `import` 定义在头部。
  eslint: [`import/first`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/first.md)
-    > Why? Since `import`s are hoisted, keeping them all at the top prevents surprising behavior.
-
+    > 为什么? 保持他们在顶部防止令人惊讶的行为。
     ```javascript
-    // bad
+    // 不太好
     import foo from 'foo';
     foo.init();
 
     import bar from 'bar';
 
-    // good
+    // 好的
     import foo from 'foo';
     import bar from 'bar';
 
@@ -1361,15 +1366,16 @@
     ```
 
   <a name="modules--multiline-imports-over-newlines"></a>
-  - [10.8](#modules--multiline-imports-over-newlines) Multiline imports should be indented just like multiline array and object literals.
+  
+  - [10.8](#modules--multiline-imports-over-newlines) 多个出口应该像数组和对象一样换行缩进。
 
-    > Why? The curly braces follow the same indentation rules as every other curly brace block in the style guide, as do the trailing commas.
+    > 为什么? 在样式指南中，滚动括号和其他滚动括号一样遵循缩进规则，后面的逗号也一样
 
     ```javascript
-    // bad
+    // 不好的
     import {longNameA, longNameB, longNameC, longNameD, longNameE} from 'path';
 
-    // good
+    // 好的
     import {
       longNameA,
       longNameB,
@@ -1380,21 +1386,22 @@
     ```
 
   <a name="modules--no-webpack-loader-syntax"></a>
-  - [10.9](#modules--no-webpack-loader-syntax) Disallow Webpack loader syntax in module import statements.
+  
+  - [10.9](#modules--no-webpack-loader-syntax) 禁止模块`import`声明中使用Webpack loader语法。
  eslint: [`import/no-webpack-loader-syntax`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-webpack-loader-syntax.md)
-    > Why? Since using Webpack syntax in the imports couples the code to a module bundler. Prefer using the loader syntax in `webpack.config.js`.
+    > 为什么? 由于Webpack语法是模块构建工具的语法糖，偏向于在`webpack.config.js`中使用。 
 
     ```javascript
-    // bad
+    // 糟糕
     import fooSass from 'css!sass!foo.scss';
     import barCss from 'style!css!bar.css';
 
-    // good
+    // 好的
     import fooSass from 'foo.scss';
     import barCss from 'bar.css';
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 ## Iterators and Generators
 
