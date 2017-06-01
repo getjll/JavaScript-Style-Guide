@@ -1069,15 +1069,16 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Classes & Constructors
+## 类和构造函数
 
   <a name="constructors--use-class"></a><a name="9.1"></a>
-  - [9.1](#constructors--use-class) Always use `class`. Avoid manipulating `prototype` directly.
+  
+  - [9.1](#constructors--use-class) 总是使用 `class`。 避免直接操作 `prototype`。
 
-    > Why? `class` syntax is more concise and easier to reason about.
+    > 为什么? `class` 更简洁，更容易推理。
 
     ```javascript
-    // bad
+    // 糟糕的
     function Queue(contents = []) {
       this.queue = [...contents];
     }
@@ -1088,7 +1089,7 @@
     };
 
 
-    // good
+    // 好的
     class Queue {
       constructor(contents = []) {
         this.queue = [...contents];
@@ -1102,12 +1103,13 @@
     ```
 
   <a name="constructors--extends"></a><a name="9.2"></a>
-  - [9.2](#constructors--extends) Use `extends` for inheritance.
+  
+  - [9.2](#constructors--extends) 使用 `extends` 进行。
 
-    > Why? It is a built-in way to inherit prototype functionality without breaking `instanceof`.
+    > 为什么? 它是一个内置的方式来继承原型的功能而不破坏 `instanceof`.
 
     ```javascript
-    // bad
+    // 糟糕的
     const inherits = require('inherits');
     function PeekableQueue(contents) {
       Queue.apply(this, contents);
@@ -1117,7 +1119,7 @@
       return this.queue[0];
     };
 
-    // good
+    // 好的
     class PeekableQueue extends Queue {
       peek() {
         return this.queue[0];
@@ -1126,10 +1128,11 @@
     ```
 
   <a name="constructors--chaining"></a><a name="9.3"></a>
-  - [9.3](#constructors--chaining) Methods can return `this` to help with method chaining.
+  
+  - [9.3](#constructors--chaining) 方法可以返回 `this` 以帮助方法链接。
 
     ```javascript
-    // bad
+    // 不太好
     Jedi.prototype.jump = function () {
       this.jumping = true;
       return true;
@@ -1143,7 +1146,7 @@
     luke.jump(); // => true
     luke.setHeight(20); // => undefined
 
-    // good
+    // 好的
     class Jedi {
       jump() {
         this.jumping = true;
@@ -1164,8 +1167,8 @@
 
 
   <a name="constructors--tostring"></a><a name="9.4"></a>
-  - [9.4](#constructors--tostring) It's okay to write a custom toString() method, just make sure it works successfully and causes no side effects.
-
+  
+  - [9.4](#constructors--tostring) 这样写也是可以的，只要你能确保它正常运行。
     ```javascript
     class Jedi {
       constructor(options = {}) {
@@ -1183,10 +1186,11 @@
     ```
 
   <a name="constructors--no-useless"></a><a name="9.5"></a>
-  - [9.5](#constructors--no-useless) Classes have a default constructor if one is not specified. An empty constructor function or one that just delegates to a parent class is unnecessary. eslint: [`no-useless-constructor`](http://eslint.org/docs/rules/no-useless-constructor)
+  
+  - [9.5](#constructors--no-useless) 类有默认构造函数。一个空构造函数函数或一个只向父类委托的函数是不必要的。 eslint: [`no-useless-constructor`](http://eslint.org/docs/rules/no-useless-constructor)
 
     ```javascript
-    // bad
+    // 糟糕的
     class Jedi {
       constructor() {}
 
@@ -1195,14 +1199,14 @@
       }
     }
 
-    // bad
+    // 同样糟糕
     class Rey extends Jedi {
       constructor(...args) {
         super(...args);
       }
     }
 
-    // good
+    // 好的
     class Rey extends Jedi {
       constructor(...args) {
         super(...args);
@@ -1212,30 +1216,31 @@
     ```
 
   <a name="classes--no-duplicate-members"></a>
-  - [9.6](#classes--no-duplicate-members) Avoid duplicate class members. eslint: [`no-dupe-class-members`](http://eslint.org/docs/rules/no-dupe-class-members)
+  
+  - [9.6](#classes--no-duplicate-members) 避免重复定义类成员。 eslint: [`no-dupe-class-members`](http://eslint.org/docs/rules/no-dupe-class-members)
 
-    > Why? Duplicate class member declarations will silently prefer the last one - having duplicates is almost certainly a bug.
+    > 为什么? 重复定义的类成员默认使用最后一个 - 有重复基本肯定是一个bug。
 
     ```javascript
-    // bad
+    // 糟糕
     class Foo {
       bar() { return 1; }
       bar() { return 2; }
     }
 
-    // good
+    // 好的
     class Foo {
       bar() { return 1; }
     }
 
-    // good
+    // 好的
     class Foo {
       bar() { return 2; }
     }
     ```
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Modules
