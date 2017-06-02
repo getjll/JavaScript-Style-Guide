@@ -34,7 +34,7 @@
   1. [模块](#modules)
   1. [迭代器和生成器](#iterators-and-generators)
   1. [性能](#properties)
-  1. [Variables](#variables)
+  1. [变量](#variables)
   1. [Hoisting](#hoisting)
   1. [Comparison Operators & Equality](#comparison-operators--equality)
   1. [Blocks](#blocks)
@@ -1555,61 +1555,63 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Variables
+## 变量
 
   <a name="variables--const"></a><a name="13.1"></a>
-  - [13.1](#variables--const) Always use `const` or `let` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that. eslint: [`no-undef`](http://eslint.org/docs/rules/no-undef) [`prefer-const`](http://eslint.org/docs/rules/prefer-const)
+  
+  - [13.1](#variables--const) 总是使用 `const` 或 `let` 定义变量。 不这样做会导致全局变量。 我们要避免污染全局命名空间。 Captain Planet warned us of that. eslint: [`no-undef`](http://eslint.org/docs/rules/no-undef) [`prefer-const`](http://eslint.org/docs/rules/prefer-const)
 
     ```javascript
-    // bad
+    // 糟糕
     superPower = new SuperPower();
 
-    // good
+    // 好的
     const superPower = new SuperPower();
     ```
 
   <a name="variables--one-const"></a><a name="13.2"></a>
-  - [13.2](#variables--one-const) Use one `const` or `let` declaration per variable. eslint: [`one-var`](http://eslint.org/docs/rules/one-var.html) jscs: [`disallowMultipleVarDecl`](http://jscs.info/rule/disallowMultipleVarDecl)
+  
+  - [13.2](#variables--one-const) 使用 `const` 或 `let` 定义每一个变量。 eslint: [`one-var`](http://eslint.org/docs/rules/one-var.html) jscs: [`disallowMultipleVarDecl`](http://jscs.info/rule/disallowMultipleVarDecl)
 
-    > Why? It's easier to add new variable declarations this way, and you never have to worry about swapping out a `;` for a `,` or introducing punctuation-only diffs. You can also step through each declaration with the debugger, instead of jumping through all of them at once.
+    > 为什么? 这样可以更容易定义一个新变量， 同时你永远不用担心切换`;`还是`,`。 还可以使用调试器单步执行每个声明，而不是跳过所有的声明。
 
     ```javascript
-    // bad
+    // 糟糕
     const items = getItems(),
         goSportsTeam = true,
         dragonball = 'z';
 
-    // bad
+    // 糟糕
     // (compare to above, and try to spot the mistake)
     const items = getItems(),
         goSportsTeam = true;
         dragonball = 'z';
 
-    // good
+    // 好的
     const items = getItems();
     const goSportsTeam = true;
     const dragonball = 'z';
     ```
 
   <a name="variables--const-let-group"></a><a name="13.3"></a>
-  - [13.3](#variables--const-let-group) Group all your `const`s and then group all your `let`s.
-
-    > Why? This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
+  
+  - [13.3](#variables--const-let-group) 全部`const`一组，全部`let`一组。
+    > 为什么? 当您稍后需要根据先前分配的变量分配一个变量时，这将很有帮助。
 
     ```javascript
-    // bad
+    // 糟糕
     let i, len, dragonball,
         items = getItems(),
         goSportsTeam = true;
 
-    // bad
+    // 不好
     let i;
     const items = getItems();
     let dragonball;
     const goSportsTeam = true;
     let len;
 
-    // good
+    // 好的
     const goSportsTeam = true;
     const items = getItems();
     let dragonball;
@@ -1618,12 +1620,13 @@
     ```
 
   <a name="variables--define-where-used"></a><a name="13.4"></a>
-  - [13.4](#variables--define-where-used) Assign variables where you need them, but place them in a reasonable place.
+  
+  - [13.4](#variables--define-where-used) 就近定义相关的变量
 
-    > Why? `let` and `const` are block scoped and not function scoped.
+    > 为什么? `let` 和 `const` 是块级作用域而不是函数作用域。
 
     ```javascript
-    // bad - unnecessary function call
+    // 糟糕 - 不必要的函数调用
     function checkName(hasName) {
       const name = getName();
 
@@ -1639,7 +1642,7 @@
       return name;
     }
 
-    // good
+    // 好的
     function checkName(hasName) {
       if (hasName === 'test') {
         return false;
@@ -1656,17 +1659,17 @@
     }
     ```
   <a name="variables--no-chain-assignment"></a><a name="13.5"></a>
-  - [13.5](#variables--no-chain-assignment) Don't chain variable assignments.
+  
+  - [13.5](#variables--no-chain-assignment) 不要链式定义变量
 
-    > Why? Chaining variable assignments creates implicit global variables.
-
+    > 为什么? 链式定义变量会隐性创造全局变量。
+    
     ```javascript
-    // bad
+    // 不好的
     (function example() {
-      // JavaScript interprets this as
+      // JavaScript 是这样解析的：
       // let a = ( b = ( c = 1 ) );
-      // The let keyword only applies to variable a; variables b and c become
-      // global variables.
+      // 关键词 `let` 只作用于变量 a; 变量 b 和 c 成为了全局变量
       let a = b = c = 1;
     }());
 
@@ -1674,7 +1677,7 @@
     console.log(b); // 1
     console.log(c); // 1
 
-    // good
+    // 好的
     (function example() {
       let a = 1;
       let b = a;
@@ -1685,16 +1688,17 @@
     console.log(b); // undefined
     console.log(c); // undefined
 
-    // the same applies for `const`
+    // `const`也是同样的
     ```
 
   <a name="variables--unary-increment-decrement"></a><a name="13.6"></a>
-  - [13.6](#variables--unary-increment-decrement) Avoid using unary increments and decrements (++, --). eslint [`no-plusplus`](http://eslint.org/docs/rules/no-plusplus)
+  
+  - [13.6](#variables--unary-increment-decrement) 避免使用一元操作符递增和递减 (++, --)。 eslint [`no-plusplus`](http://eslint.org/docs/rules/no-plusplus)
 
-    > Why? Per the eslint documentation, unary increment and decrement statements are subject to automatic semicolon insertion and can cause silent errors with incrementing or decrementing values within an application. It is also more expressive to mutate your values with statements like `num += 1` instead of `num++` or `num ++`. Disallowing unary increment and decrement statements also prevents you from pre-incrementing/pre-decrementing values unintentionally which can also cause unexpected behavior in your programs.
-
+    > 为什么? Per the eslint documentation, 一元递增和递减陈述受自动分号的插入，导致递增或递减的值在应用沉默的错误。 更直观说明的代码含义如 `num += 1`，而不是 `num++` 和 `num--`。不允许一元递增和递减的陈述也防止您递增/递减值预前无意中也可使你的程序的意外行为。
+    
     ```javascript
-    // bad
+    // 糟糕
 
     const array = [1, 2, 3];
     let num = 1;
@@ -1711,7 +1715,7 @@
       }
     }
 
-    // good
+    // 好的
 
     const array = [1, 2, 3];
     let num = 1;
@@ -1722,7 +1726,7 @@
     const truthyCount = array.filter(Boolean).length;
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Hoisting
