@@ -33,7 +33,7 @@
   1. [类和构造函数](#classes--constructors)
   1. [模块](#modules)
   1. [迭代器和生成器](#iterators-and-generators)
-  1. [Properties](#properties)
+  1. [性能](#properties)
   1. [Variables](#variables)
   1. [Hoisting](#hoisting)
   1. [Comparison Operators & Equality](#comparison-operators--equality)
@@ -1517,10 +1517,11 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Properties
+## 性能
 
   <a name="properties--dot"></a><a name="12.1"></a>
-  - [12.1](#properties--dot) Use dot notation when accessing properties. eslint: [`dot-notation`](http://eslint.org/docs/rules/dot-notation.html) jscs: [`requireDotNotation`](http://jscs.info/rule/requireDotNotation)
+  
+  - [12.1](#properties--dot) 使用点语法访问属性。 eslint: [`dot-notation`](http://eslint.org/docs/rules/dot-notation.html) jscs: [`requireDotNotation`](http://jscs.info/rule/requireDotNotation)
 
     ```javascript
     const luke = {
@@ -1528,16 +1529,16 @@
       age: 28,
     };
 
-    // bad
+    // 不好
     const isJedi = luke['jedi'];
 
-    // good
+    // 好
     const isJedi = luke.jedi;
     ```
 
   <a name="properties--bracket"></a><a name="12.2"></a>
-  - [12.2](#properties--bracket) Use bracket notation `[]` when accessing properties with a variable.
-
+  
+  - [12.2](#properties--bracket) 访问属性是一个变量时使用括号 `[]`。
     ```javascript
     const luke = {
       jedi: true,
@@ -1551,7 +1552,7 @@
     const isJedi = getProp('jedi');
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Variables
