@@ -32,7 +32,7 @@
   1. [箭头函数](#arrow-functions)
   1. [类和构造函数](#classes--constructors)
   1. [模块](#modules)
-  1. [Iterators and Generators](#iterators-and-generators)
+  1. [迭代器和生成器](#iterators-and-generators)
   1. [Properties](#properties)
   1. [Variables](#variables)
   1. [Hoisting](#hoisting)
@@ -1403,115 +1403,118 @@
 
 **[⬆ 回到顶部](#table-of-contents)**
 
-## Iterators and Generators
+## 迭代器和生成器
 
   <a name="iterators--nope"></a><a name="11.1"></a>
-  - [11.1](#iterators--nope) Don't use iterators. Prefer JavaScript's higher-order functions instead of loops like `for-in` or `for-of`. eslint: [`no-iterator`](http://eslint.org/docs/rules/no-iterator.html) [`no-restricted-syntax`](http://eslint.org/docs/rules/no-restricted-syntax)
+  
+  - [11.1](#iterators--nope) 不要使用迭代器。更喜欢JavaScript的高阶函数，而不是`for-in` 或 `for-of`。 eslint: [`no-iterator`](http://eslint.org/docs/rules/no-iterator.html) [`no-restricted-syntax`](http://eslint.org/docs/rules/no-restricted-syntax)
 
-    > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side effects.
+    > 为什么? 强制执行我们的不可变规则。处理返回值的纯函数比副作用更容易解释。
 
-    > Use `map()` / `every()` / `filter()` / `find()` / `findIndex()` / `reduce()` / `some()` / ... to iterate over arrays, and `Object.keys()` / `Object.values()` / `Object.entries()` to produce arrays so you can iterate over objects.
+    > 使用 `map()` / `every()` / `filter()` / `find()` / `findIndex()` / `reduce()` / `some()` / ... 遍历数组； `Object.keys()` / `Object.values()` / `Object.entries()` 生成数组，以便可以遍历对象。
 
     ```javascript
     const numbers = [1, 2, 3, 4, 5];
 
-    // bad
+    // 不好
     let sum = 0;
     for (let num of numbers) {
       sum += num;
     }
     sum === 15;
 
-    // good
+    // 好
     let sum = 0;
     numbers.forEach(num => sum += num);
     sum === 15;
 
-    // best (use the functional force)
+    // 更好 (使用函数功能)
     const sum = numbers.reduce((total, num) => total + num, 0);
     sum === 15;
 
-    // bad
+    // 不好
     const increasedByOne = [];
     for (let i = 0; i < numbers.length; i++) {
       increasedByOne.push(numbers[i] + 1);
     }
 
-    // good
+    // 好的
     const increasedByOne = [];
     numbers.forEach(num => increasedByOne.push(num + 1));
 
-    // best (keeping it functional)
+    // 更好 (保持它的功能)
     const increasedByOne = numbers.map(num => num + 1);
     ```
 
   <a name="generators--nope"></a><a name="11.2"></a>
-  - [11.2](#generators--nope) Don't use generators for now.
+  
+  - [11.2](#generators--nope) 目前不要使用generators。
 
-    > Why? They don't transpile well to ES5.
+    > 为什么? 不能编译为ES5。
 
   <a name="generators--spacing"></a>
-  - [11.3](#generators--spacing) If you must use generators, or if you disregard [our advice](#generators--nope), make sure their function signature is spaced properly. eslint: [`generator-star-spacing`](http://eslint.org/docs/rules/generator-star-spacing)
+  
+  - [11.3](#generators--spacing) 如果你必须使用 generators 或者无视我们的[劝告](#generators--nope)， 请确保它们的标识间隔正确。 eslint: [`generator-star-spacing`](http://eslint.org/docs/rules/generator-star-spacing)
 
-    > Why? `function` and `*` are part of the same conceptual keyword - `*` is not a modifier for `function`, `function*` is a unique construct, different from `function`.
+    > 为什么? `function` 和 `*` 是同一概念关键字的一部分 - `*` 不是 `function` 的修饰符， `function*` 是一个独特的结构，不同于 `function`。
 
     ```javascript
-    // bad
+    // 糟糕
     function * foo() {
       // ...
     }
 
-    // bad
+    // 糟糕
     const bar = function * () {
       // ...
     };
 
-    // bad
+    // 糟糕
     const baz = function *() {
       // ...
     };
 
-    // bad
+    // 糟糕
     const quux = function*() {
       // ...
     };
 
-    // bad
+    // 糟糕
     function*foo() {
       // ...
     }
 
-    // bad
+    // 糟糕
     function *foo() {
       // ...
     }
 
-    // very bad
+    // 非常糟糕
     function
     *
     foo() {
       // ...
     }
 
-    // very bad
+    // 非常糟糕
     const wat = function
     *
     () {
       // ...
     };
 
-    // good
+    // 好的
     function* foo() {
       // ...
     }
 
-    // good
+    // 好
     const foo = function* () {
       // ...
     };
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Properties
