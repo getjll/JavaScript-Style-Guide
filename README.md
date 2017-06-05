@@ -2103,13 +2103,14 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Comments
+## 注释
 
   <a name="comments--multiline"></a><a name="17.1"></a>
-  - [18.1](#comments--multiline) Use `/** ... */` for multi-line comments.
+  
+  - [18.1](#comments--multiline) 对行注释使用 `/** ... */`。
 
     ```javascript
-    // bad
+    // 不好
     // make() returns a new element
     // based on the passed in tag name
     //
@@ -2122,7 +2123,7 @@
       return element;
     }
 
-    // good
+    // 好的
     /**
      * make() returns a new element
      * based on the passed-in tag name
@@ -2136,17 +2137,18 @@
     ```
 
   <a name="comments--singleline"></a><a name="17.2"></a>
-  - [18.2](#comments--singleline) Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it's on the first line of a block.
+  
+  - [18.2](#comments--singleline) 单行注释使用 `//` 。将单行注释放在上方。 注释行上方添加一个空白行，除非是在代码块的第一行。
 
     ```javascript
-    // bad
+    // 坏
     const active = true;  // is current tab
 
-    // good
+    // 好
     // is current tab
     const active = true;
 
-    // bad
+    // 坏
     function getType() {
       console.log('fetching type...');
       // set the default type to 'no type'
@@ -2155,37 +2157,37 @@
       return type;
     }
 
-    // good
+    // 好
     function getType() {
       console.log('fetching type...');
 
-      // set the default type to 'no type'
+      // type的默认值为'no type'
       const type = this.type || 'no type';
 
       return type;
     }
 
-    // also good
+    // 同样好的
     function getType() {
-      // set the default type to 'no type'
+      // type的默认值为'no type'
       const type = this.type || 'no type';
 
       return type;
     }
     ```
 
-  - [18.3](#comments--spaces) Start all comments with a space to make it easier to read. eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)
+  - [18.3](#comments--spaces) 注释文字开始前的添加空格可以提高可读性。 eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)
 
     ```javascript
-    // bad
+    // 坏
     //is current tab
     const active = true;
 
-    // good
+    // 好
     // is current tab
     const active = true;
 
-    // bad
+    // 坏
     /**
      *make() returns a new element
      *based on the passed-in tag name
@@ -2197,7 +2199,7 @@
       return element;
     }
 
-    // good
+    // 好
     /**
      * make() returns a new element
      * based on the passed-in tag name
@@ -2211,37 +2213,40 @@
     ```
 
   <a name="comments--actionitems"></a><a name="17.3"></a>
-  - [18.4](#comments--actionitems) Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME: -- need to figure this out` or `TODO: -- need to implement`.
+  
+  - [18.4](#comments--actionitems) 如果你指出一个需要重新审视的问题，添加 `FIXME` 前缀 帮助其他的开发者快速理解。如果这一个需要解决方案的问题，添加 `TODO` 前缀。 这些不同于常规评论，因为它们是可操作的。 使用 `FIXME: -- 需要解决` or `TODO: -- 需要实现`.
 
   <a name="comments--fixme"></a><a name="17.4"></a>
-  - [18.5](#comments--fixme) Use `// FIXME:` to annotate problems.
+  
+  - [18.5](#comments--fixme) 使用 `// FIXME:` 注释一个问题。
 
     ```javascript
     class Calculator extends Abacus {
       constructor() {
         super();
 
-        // FIXME: shouldn't use a global here
+        // FIXME: 不应该使用全局变量
         total = 0;
       }
     }
     ```
 
   <a name="comments--todo"></a><a name="17.5"></a>
-  - [18.6](#comments--todo) Use `// TODO:` to annotate solutions to problems.
+  
+  - [18.6](#comments--todo) 使用 `// TODO:` 注释一个待解决问题。
 
     ```javascript
     class Calculator extends Abacus {
       constructor() {
         super();
 
-        // TODO: total should be configurable by an options param
+        // TODO: total 需要变成一个可配置的选项参数
         this.total = 0;
       }
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Whitespace
