@@ -36,7 +36,7 @@
   1. [属性](#properties)
   1. [变量](#variables)
   1. [变量提升](#hoisting)
-  1. [Comparison Operators & Equality](#comparison-operators--equality)
+  1. [比较运算符 & 相等](#comparison-operators--equality)
   1. [Blocks](#blocks)
   1. [Control Statements](#control-statements)
   1. [Comments](#comments)
@@ -1829,75 +1829,80 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Comparison Operators & Equality
+## 比较运算符 & 相等
 
   <a name="comparison--eqeqeq"></a><a name="15.1"></a>
-  - [15.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`. eslint: [`eqeqeq`](http://eslint.org/docs/rules/eqeqeq.html)
+  
+  - [15.1](#comparison--eqeqeq) 使用 `===` 和 `!==` ； `==` 和 `!=`. eslint: [`eqeqeq`](http://eslint.org/docs/rules/eqeqeq.html)
 
   <a name="comparison--if"></a><a name="15.2"></a>
-  - [15.2](#comparison--if) Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+  
+  - [15.2](#comparison--if) 条件语法，如 `if` 通过默认方式 `ToBoolean` 计算表达式，并且总时遵循一下规则：
 
-    + **Objects** evaluate to **true**
-    + **Undefined** evaluates to **false**
-    + **Null** evaluates to **false**
-    + **Booleans** evaluate to **the value of the boolean**
-    + **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
-    + **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
+    + **Objects** 转换为 **true**
+    + **Undefined** 转换为 **false**
+    + **Null** 转换为 **false**
+    + **Booleans** 转换为 **the value of the boolean**
+    + **Numbers** 如果 **+0, -0, or NaN** 转换为 **false**，否则 **true**
+    + **Strings** 空字符串`''`转换为 **false**，否则 **true**
 
     ```javascript
     if ([0] && []) {
       // true
-      // an array (even an empty one) is an object, objects will evaluate to true
+      // 数组 (即使是空的) 也是一个对象, 对象将被转换为 true
     }
     ```
 
   <a name="comparison--shortcuts"></a><a name="15.3"></a>
-  - [15.3](#comparison--shortcuts) Use shortcuts for booleans, but explicit comparisons for strings and numbers.
+  
+  - [15.3](#comparison--shortcuts) 使用表达式转换， 但是明确比较字符串和数字。
 
     ```javascript
-    // bad
+    // 不好
     if (isValid === true) {
       // ...
     }
 
-    // good
+    // 好
     if (isValid) {
       // ...
     }
 
-    // bad
+    // 不好
     if (name) {
       // ...
     }
 
-    // good
+    // 好
     if (name !== '') {
       // ...
     }
 
-    // bad
+    // 不好
     if (collection.length) {
       // ...
     }
 
-    // good
+    // 好
     if (collection.length > 0) {
       // ...
     }
     ```
 
   <a name="comparison--moreinfo"></a><a name="15.4"></a>
-  - [15.4](#comparison--moreinfo) For more information see [Truth Equality and JavaScript](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
+  
+  - [15.4](#comparison--moreinfo) 更多信息参考 Angus Croll 的 [Truth Equality and JavaScript](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) 。
 
   <a name="comparison--switch-blocks"></a><a name="15.5"></a>
-  - [15.5](#comparison--switch-blocks) Use braces to create blocks in `case` and `default` clauses that contain lexical declarations (e.g. `let`, `const`, `function`, and `class`).
+  
+  - [15.5](#comparison--switch-blocks) `case` 和 `default` 使用花括号创建包含词法声明（例如：`let`， `const`， `function`， 和 `class`）的代码块。
 
-    > Why? Lexical declarations are visible in the entire `switch` block but only get initialized when assigned, which only happens when its `case` is reached. This causes problems when multiple `case` clauses attempt to define the same thing.
+    > 为什么? 在整个 `switch` 块中词法声明是可见的，但是只在匹配 `case` 初始化后才赋值。 当多个 `case` 定义相同的声明，就会出现问题。
 
     eslint rules: [`no-case-declarations`](http://eslint.org/docs/rules/no-case-declarations.html).
 
     ```javascript
-    // bad
+    // 不好
     switch (foo) {
       case 1:
         let x = 1;
@@ -1914,7 +1919,7 @@
         class C {}
     }
 
-    // good
+    // 好的
     switch (foo) {
       case 1: {
         let x = 1;
@@ -1940,47 +1945,48 @@
     ```
 
   <a name="comparison--nested-ternaries"></a><a name="15.6"></a>
-  - [15.6](#comparison--nested-ternaries) Ternaries should not be nested and generally be single line expressions.
-
+  
+  - [15.6](#comparison--nested-ternaries) 三元表达式不要嵌套并且一般写成单行。
     eslint rules: [`no-nested-ternary`](http://eslint.org/docs/rules/no-nested-ternary.html).
 
     ```javascript
-    // bad
+    // 不好
     const foo = maybe1 > maybe2
       ? "bar"
       : value1 > value2 ? "baz" : null;
 
-    // better
+    // 稍微好点
     const maybeNull = value1 > value2 ? 'baz' : null;
 
     const foo = maybe1 > maybe2
       ? 'bar'
       : maybeNull;
 
-    // best
+    // 更好的选择
     const maybeNull = value1 > value2 ? 'baz' : null;
 
     const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
     ```
 
   <a name="comparison--unneeded-ternary"></a><a name="15.7"></a>
-  - [15.7](#comparison--unneeded-ternary) Avoid unneeded ternary statements.
+  
+  - [15.7](#comparison--unneeded-ternary) 避免不必要的三元表达式。
 
     eslint rules: [`no-unneeded-ternary`](http://eslint.org/docs/rules/no-unneeded-ternary.html).
 
     ```javascript
-    // bad
+    // 不太好
     const foo = a ? a : b;
     const bar = c ? true : false;
     const baz = c ? false : true;
 
-    // good
+    // 好的
     const foo = a || b;
     const bar = !!c;
     const baz = !c;
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Blocks
