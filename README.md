@@ -35,7 +35,7 @@
   1. [迭代器和生成器](#iterators-and-generators)
   1. [属性](#properties)
   1. [变量](#variables)
-  1. [Hoisting](#hoisting)
+  1. [变量提升](#hoisting)
   1. [Comparison Operators & Equality](#comparison-operators--equality)
   1. [Blocks](#blocks)
   1. [Control Statements](#control-statements)
@@ -1729,37 +1729,35 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Hoisting
+## 变量提升
 
   <a name="hoisting--about"></a><a name="14.1"></a>
-  - [14.1](#hoisting--about) `var` declarations get hoisted to the top of their scope, their assignment does not. `const` and `let` declarations are blessed with a new concept called [Temporal Dead Zones (TDZ)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let). It's important to know why [typeof is no longer safe](http://es-discourse.com/t/why-typeof-is-no-longer-safe/15).
-
+  
+  - [14.1](#hoisting--about) `var` 声明会被提升至声明时作用域的顶部。`const` 和 `let` 有一种新的概念 [暂时性死区(TDZ)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let)所以不会。这对理解[typeof 不安全](http://es-discourse.com/t/why-typeof-is-no-longer-safe/15)很重要。
     ```javascript
-    // we know this wouldn't work (assuming there
-    // is no notDefined global variable)
+    // 我们知道这是无法工作的 (假设没有定义全局变量notDefined)
     function example() {
       console.log(notDefined); // => throws a ReferenceError
     }
 
-    // creating a variable declaration after you
-    // reference the variable will work due to
-    // variable hoisting. Note: the assignment
-    // value of `true` is not hoisted.
+    // 创建变量声明后
+    // 由于变量提升参考变量可以工作
+    // 注意: 赋值 `true` 不提升。
     function example() {
       console.log(declaredButNotAssigned); // => undefined
       var declaredButNotAssigned = true;
     }
 
-    // the interpreter is hoisting the variable
-    // declaration to the top of the scope,
-    // which means our example could be rewritten as:
+    // 解释器正在提升变量
+    // 声明到范围的顶部，
+    // 这意味着我们的例子可以改写为:
     function example() {
       let declaredButNotAssigned;
       console.log(declaredButNotAssigned); // => undefined
       declaredButNotAssigned = true;
     }
 
-    // using const and let
+    // 使用 const 和 let
     function example() {
       console.log(declaredButNotAssigned); // => throws a ReferenceError
       console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
@@ -1768,7 +1766,8 @@
     ```
 
   <a name="hoisting--anon-expressions"></a><a name="14.2"></a>
-  - [14.2](#hoisting--anon-expressions) Anonymous function expressions hoist their variable name, but not the function assignment.
+  
+  - [14.2](#hoisting--anon-expressions) 匿名函数表达式的变量名提升，但不是函数赋值。
 
     ```javascript
     function example() {
@@ -1783,7 +1782,8 @@
     ```
 
   <a name="hoisting--named-expresions"></a><a name="14.3"></a>
-  - [14.3](#hoisting--named-expresions) Named function expressions hoist the variable name, not the function name or the function body.
+  
+  - [14.3](#hoisting--named-expresions) 具名函数表达式的变量名提升， 而函数名和函数体不提升。
 
     ```javascript
     function example() {
@@ -1798,8 +1798,7 @@
       };
     }
 
-    // the same is true when the function name
-    // is the same as the variable name.
+    // 当函数名与变量名相同时也一样。
     function example() {
       console.log(named); // => undefined
 
@@ -1812,7 +1811,8 @@
     ```
 
   <a name="hoisting--declarations"></a><a name="14.4"></a>
-  - [14.4](#hoisting--declarations) Function declarations hoist their name and the function body.
+  
+  - [14.4](#hoisting--declarations) 函数声明将提升函数名和函数体。
 
     ```javascript
     function example() {
@@ -1824,9 +1824,9 @@
     }
     ```
 
-  - For more information refer to [JavaScript Scoping & Hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting/) by [Ben Cherry](http://www.adequatelygood.com/).
+  - 更多信息参考[Ben Cherry](http://www.adequatelygood.com/)的[JavaScript Scoping & Hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting/)。
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Comparison Operators & Equality
