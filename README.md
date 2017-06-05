@@ -4,7 +4,7 @@
 >
 > 强烈建议看原版 => [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 
-# JavaScript 风格指南() {
+# Airbnb JavaScript 风格指南() {
 
 *更合理的书写 JavaScript*
 
