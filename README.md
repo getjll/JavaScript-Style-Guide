@@ -33,7 +33,7 @@
   1. [类和构造函数](#classes--constructors)
   1. [模块](#modules)
   1. [迭代器和生成器](#iterators-and-generators)
-  1. [性能](#properties)
+  1. [属性](#properties)
   1. [变量](#variables)
   1. [Hoisting](#hoisting)
   1. [Comparison Operators & Equality](#comparison-operators--equality)
