@@ -38,7 +38,7 @@
   1. [变量提升](#hoisting)
   1. [比较运算符 & 相等](#comparison-operators--equality)
   1. [代码块](#blocks)
-  1. [Control Statements](#control-statements)
+  1. [控制语句](#control-statements)
   1. [Comments](#comments)
   1. [Whitespace](#whitespace)
   1. [Commas](#commas)
@@ -2044,30 +2044,31 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Control Statements
+## 控制语句
 
   <a name="control-statements"></a>
-  - [17.1](#control-statements) In case your control statement (`if`, `while` etc.) gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. It's up to you whether the logical operator should begin or end the line.
+  
+  - [17.1](#control-statements) 如果你的控制语句（`if`，`while`等。）太长或者超过单行最大长度，每个分组条件都应该单独一行。逻辑运算符是否应该开始或结束行取决于你。
 
     ```javascript
-    // bad
+    // 不好
     if ((foo === 123 || bar === 'abc') && doesItLookGoodWhenItBecomesThatLong() && isThisReallyHappening()) {
       thing1();
     }
 
-    // bad
+    // 不好
     if (foo === 123 &&
       bar === 'abc') {
       thing1();
     }
 
-    // bad
+    // 不好
     if (foo === 123
       && bar === 'abc') {
       thing1();
     }
 
-    // good
+    // 好
     if (
       (foo === 123 || bar === "abc") &&
       doesItLookGoodWhenItBecomesThatLong() &&
@@ -2076,12 +2077,12 @@
       thing1();
     }
 
-    // good
+    // 好
     if (foo === 123 && bar === 'abc') {
       thing1();
     }
 
-    // good
+    // 好
     if (
       foo === 123 &&
       bar === 'abc'
@@ -2089,7 +2090,7 @@
       thing1();
     }
 
-    // good
+    // 好
     if (
       foo === 123
       && bar === 'abc'
@@ -2099,7 +2100,7 @@
     ```
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Comments
