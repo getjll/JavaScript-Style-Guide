@@ -37,7 +37,7 @@
   1. [变量](#variables)
   1. [变量提升](#hoisting)
   1. [比较运算符 & 相等](#comparison-operators--equality)
-  1. [Blocks](#blocks)
+  1. [代码块](#blocks)
   1. [Control Statements](#control-statements)
   1. [Comments](#comments)
   1. [Whitespace](#whitespace)
@@ -1989,38 +1989,40 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Blocks
+## 代码块
 
   <a name="blocks--braces"></a><a name="16.1"></a>
-  - [16.1](#blocks--braces) Use braces with all multi-line blocks.
+  
+  - [16.1](#blocks--braces) 在所有的多行代码块使用括号。
 
     ```javascript
-    // bad
+    // 不好
     if (test)
       return false;
 
-    // good
+    // 好的
     if (test) return false;
 
-    // good
+    // 好的
     if (test) {
       return false;
     }
 
-    // bad
+    // 坏
     function foo() { return false; }
 
-    // good
+    // 好
     function bar() {
       return false;
     }
     ```
 
   <a name="blocks--cuddled-elses"></a><a name="16.2"></a>
-  - [16.2](#blocks--cuddled-elses) If you're using multi-line blocks with `if` and `else`, put `else` on the same line as your `if` block's closing brace. eslint: [`brace-style`](http://eslint.org/docs/rules/brace-style.html) jscs:  [`disallowNewlineBeforeBlockStatements`](http://jscs.info/rule/disallowNewlineBeforeBlockStatements)
+  
+  - [16.2](#blocks--cuddled-elses) 如果你用到多行代码块 `if` 和 `esle` ，请将`else`放在 `if` 闭合括号的同一行。 eslint: [`brace-style`](http://eslint.org/docs/rules/brace-style.html) jscs:  [`disallowNewlineBeforeBlockStatements`](http://jscs.info/rule/disallowNewlineBeforeBlockStatements)
 
     ```javascript
-    // bad
+    // 坏
     if (test) {
       thing1();
       thing2();
@@ -2029,7 +2031,7 @@
       thing3();
     }
 
-    // good
+    // 好
     if (test) {
       thing1();
       thing2();
@@ -2039,7 +2041,7 @@
     ```
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Control Statements
