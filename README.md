@@ -3240,10 +3240,11 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 <a name="ecmascript-6-styles"></a>
-## ECMAScript 6+ (ES 2015+) Styles
+## ECMAScript 6+ (ES 2015+) 风格
 
   <a name="es6-styles"></a><a name="27.1"></a>
-  - [28.1](#es6-styles) This is a collection of links to the various ES6 features.
+  
+  - [28.1](#es6-styles) 这是一个收集的各种ES6特性的链接。
 
 1. [Arrow Functions](#arrow-functions)
 1. [Classes](#classes--constructors)
@@ -3260,11 +3261,11 @@
 1. [Modules](#modules)
 
   <a name="tc39-proposals"></a>
-  - [28.2](#tc39-proposals) Do not use [TC39 proposals](https://github.com/tc39/proposals) that have not reached stage 3.
+  
+  - [28.2](#tc39-proposals) 不要使用还未到达第三阶段的[TC39 提案](https://github.com/tc39/proposals)。
 
-    > Why? [They are not finalized](https://tc39.github.io/process-document/), and they are subject to change or to be withdrawn entirely. We want to use JavaScript, and proposals are not JavaScript yet.
-
-**[⬆ back to top](#table-of-contents)**
+    > 为什么? [他们还没有最终采用](https://tc39.github.io/process-document/)，他们还没有被最终采用，很可能发生改变，甚至整个被取消掉。我们要使用JavaScript语言，而不是那些提议，那些提议还没有变成语言的一部分。
+**[⬆ 回到顶部](#table-of-contents)**
 
 ## Testing
 
