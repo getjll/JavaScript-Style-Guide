@@ -2725,34 +2725,35 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Semicolons
+## 分号
 
   <a name="semicolons--required"></a><a name="20.1"></a>
-  - [21.1](#semicolons--required) **Yup.** eslint: [`semi`](http://eslint.org/docs/rules/semi.html) jscs: [`requireSemicolons`](http://jscs.info/rule/requireSemicolons)
+  
+  - [21.1](#semicolons--required) **需要。** eslint: [`semi`](http://eslint.org/docs/rules/semi.html) jscs: [`requireSemicolons`](http://jscs.info/rule/requireSemicolons)
 
     ```javascript
-    // bad
+    // 不好
     (function () {
       const name = 'Skywalker'
       return name
     })()
 
-    // good
+    // 好
     (function () {
       const name = 'Skywalker';
       return name;
     }());
 
-    // good, but legacy (guards against the function becoming an argument when two files with IIFEs are concatenated)
+    // 好, but legacy (防止两个立即调用的函数表达式合并时被当成参数)
     ;((() => {
       const name = 'Skywalker';
       return name;
     })());
     ```
 
-    [Read more](https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function/7365214%237365214).
+    [查看更多](https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function/7365214%237365214).
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Type Casting & Coercion
