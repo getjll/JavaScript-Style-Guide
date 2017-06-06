@@ -2756,57 +2756,61 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Type Casting & Coercion
+## 类型转换
 
   <a name="coercion--explicit"></a><a name="21.1"></a>
-  - [22.1](#coercion--explicit) Perform type coercion at the beginning of the statement.
+  
+  - [22.1](#coercion--explicit) 在语句开始时执行类型转换
 
   <a name="coercion--strings"></a><a name="21.2"></a>
-  - [22.2](#coercion--strings)  Strings:
+  
+  - [22.2](#coercion--strings)  字符类型:
 
     ```javascript
     // => this.reviewScore = 9;
 
-    // bad
-    const totalScore = this.reviewScore + ''; // invokes this.reviewScore.valueOf()
+    // 不好
+    const totalScore = this.reviewScore + ''; // 调用 this.reviewScore.valueOf()
 
-    // bad
-    const totalScore = this.reviewScore.toString(); // isn't guaranteed to return a string
+    // 不好
+    const totalScore = this.reviewScore.toString(); // 不一定返回字符串
 
-    // good
+    // 好
     const totalScore = String(this.reviewScore);
     ```
 
   <a name="coercion--numbers"></a><a name="21.3"></a>
-  - [22.3](#coercion--numbers) Numbers: Use `Number` for type casting and `parseInt` always with a radix for parsing strings. eslint: [`radix`](http://eslint.org/docs/rules/radix)
+  
+  - [22.3](#coercion--numbers) 数字类型: 使用 `Number` 和 总是带上转换基数的 `parseInt`。eslint: [`radix`](http://eslint.org/docs/rules/radix)
 
     ```javascript
     const inputValue = '4';
 
-    // bad
+    // 不好
     const val = new Number(inputValue);
 
-    // bad
+    // 不好
     const val = +inputValue;
 
-    // bad
+    // 不好
     const val = inputValue >> 0;
 
-    // bad
+    // 不好
     const val = parseInt(inputValue);
 
-    // good
+    // 好
     const val = Number(inputValue);
 
-    // good
+    // 好
     const val = parseInt(inputValue, 10);
     ```
 
   <a name="coercion--comment-deviations"></a><a name="21.4"></a>
-  - [22.4](#coercion--comment-deviations) If for whatever reason you are doing something wild and `parseInt` is your bottleneck and need to use Bitshift for [performance reasons](https://jsperf.com/coercion-vs-casting/3), leave a comment explaining why and what you're doing.
+  
+  - [22.4](#coercion--comment-deviations) 如果因为 `parseInt` 的 [性能问题](https://jsperf.com/coercion-vs-casting/3)不能满足你的需求，请留下注释说明原因。
 
     ```javascript
-    // good
+    // 好
     /**
      * parseInt was the reason my code was slow.
      * Bitshifting the String to coerce it to a
@@ -2816,7 +2820,8 @@
     ```
 
   <a name="coercion--bitwise"></a><a name="21.5"></a>
-  - [22.5](#coercion--bitwise) **Note:** Be careful when using bitshift operations. Numbers are represented as [64-bit values](https://es5.github.io/#x4.3.19), but bitshift operations always return a 32-bit integer ([source](https://es5.github.io/#x11.7)). Bitshift can lead to unexpected behavior for integer values larger than 32 bits. [Discussion](https://github.com/airbnb/javascript/issues/109). Largest signed 32-bit Int is 2,147,483,647:
+  
+  - [22.5](#coercion--bitwise) **Note:** 小心位操作。数字会被当成 [64-bit values](https://es5.github.io/#x4.3.19)， 但是位操作运算符总是返回 32 位的整数 ([source](https://es5.github.io/#x11.7))。位操作处理大于 32 位的整数值时还会导致意料之外的行为。 [Discussion](https://github.com/airbnb/javascript/issues/109). 最大的32位整数是 2,147,483,647:
 
     ```javascript
     2147483647 >> 0; // => 2147483647
@@ -2825,22 +2830,23 @@
     ```
 
   <a name="coercion--booleans"></a><a name="21.6"></a>
-  - [22.6](#coercion--booleans) Booleans:
+  
+  - [22.6](#coercion--booleans) 布尔类型:
 
     ```javascript
     const age = 0;
 
-    // bad
+    // 不好
     const hasAge = new Boolean(age);
 
-    // good
+    // 好
     const hasAge = Boolean(age);
 
-    // best
+    // 更好
     const hasAge = !!age;
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Naming Conventions
