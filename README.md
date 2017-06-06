@@ -2587,27 +2587,28 @@
 
 **[⬆ 回到顶部](#table-of-contents)**
 
-## Commas
+## 逗号
 
 <a name="commas--leading-trailing"></a><a name="19.1"></a>
-  - [20.1](#commas--leading-trailing) Leading commas: **Nope.** eslint: [`comma-style`](http://eslint.org/docs/rules/comma-style.html) jscs: [`requireCommaBeforeLineBreak`](http://jscs.info/rule/requireCommaBeforeLineBreak)
+
+  - [20.1](#commas--leading-trailing) 逗号前置？ **不。** eslint: [`comma-style`](http://eslint.org/docs/rules/comma-style.html) jscs: [`requireCommaBeforeLineBreak`](http://jscs.info/rule/requireCommaBeforeLineBreak)
 
     ```javascript
-    // bad
+    // 不好
     const story = [
         once
       , upon
       , aTime
     ];
 
-    // good
+    // 好
     const story = [
       once,
       upon,
       aTime,
     ];
 
-    // bad
+    // 不好
     const hero = {
         firstName: 'Ada'
       , lastName: 'Lovelace'
@@ -2615,7 +2616,7 @@
       , superPower: 'computers'
     };
 
-    // good
+    // 好
     const hero = {
       firstName: 'Ada',
       lastName: 'Lovelace',
@@ -2625,12 +2626,13 @@
     ```
 
   <a name="commas--dangling"></a><a name="19.2"></a>
-  - [20.2](#commas--dangling) Additional trailing comma: **Yup.** eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle.html) jscs: [`requireTrailingComma`](http://jscs.info/rule/requireTrailingComma)
+  
+  - [20.2](#commas--dangling) 最后也添加都好？ **是的。** eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle.html) jscs: [`requireTrailingComma`](http://jscs.info/rule/requireTrailingComma)
 
-    > Why? This leads to cleaner git diffs. Also, transpilers like Babel will remove the additional trailing comma in the transpiled code which means you don't have to worry about the [trailing comma problem](https://github.com/airbnb/javascript/blob/es5-deprecated/es5/README.md#commas) in legacy browsers.
+    > 为什么? git的diff记录更清爽。 同时，你不必担心后面的[逗号的问题](https://github.com/airbnb/javascript/blob/es5-deprecated/es5/README.md#commas)在传统的浏览器，因为类似Babel这样的转译器将会在转译的同时删除多余的逗号。
 
     ```diff
-    // bad - git diff without trailing comma
+    // 不好的 - git diff 没有尾随逗号
     const hero = {
          firstName: 'Florence',
     -    lastName: 'Nightingale'
@@ -2638,7 +2640,7 @@
     +    inventorOf: ['coxcomb chart', 'modern nursing']
     };
 
-    // good - git diff with trailing comma
+    // good - git diff 有尾随逗号
     const hero = {
          firstName: 'Florence',
          lastName: 'Nightingale',
@@ -2647,7 +2649,7 @@
     ```
 
     ```javascript
-    // bad
+    // 不好
     const hero = {
       firstName: 'Dana',
       lastName: 'Scully'
@@ -2658,7 +2660,7 @@
       'Superman'
     ];
 
-    // good
+    // 好
     const hero = {
       firstName: 'Dana',
       lastName: 'Scully',
@@ -2669,7 +2671,7 @@
       'Superman',
     ];
 
-    // bad
+    // 不好
     function createHero(
       firstName,
       lastName,
@@ -2678,7 +2680,7 @@
       // does nothing
     }
 
-    // good
+    // 好
     function createHero(
       firstName,
       lastName,
@@ -2687,7 +2689,7 @@
       // does nothing
     }
 
-    // good (note that a comma must not appear after a "rest" element)
+    // 好 (注意：在展开对象后面不能出现逗号)
     function createHero(
       firstName,
       lastName,
@@ -2697,21 +2699,21 @@
       // does nothing
     }
 
-    // bad
+    // 不好
     createHero(
       firstName,
       lastName,
       inventorOf
     );
 
-    // good
+    // 好
     createHero(
       firstName,
       lastName,
       inventorOf,
     );
 
-    // good (note that a comma must not appear after a "rest" element)
+    // 好 (注意：在展开对象后面不能出现逗号)
     createHero(
       firstName,
       lastName,
@@ -2720,7 +2722,7 @@
     );
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Semicolons
