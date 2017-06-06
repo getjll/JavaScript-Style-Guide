@@ -3160,24 +3160,26 @@
 ## jQuery
 
   <a name="jquery--dollar-prefix"></a><a name="25.1"></a>
-  - [26.1](#jquery--dollar-prefix) Prefix jQuery object variables with a `$`. jscs: [`requireDollarBeforejQueryAssignment`](http://jscs.info/rule/requireDollarBeforejQueryAssignment)
+  
+  - [26.1](#jquery--dollar-prefix) jQuery对象赋值的变量 `$` 开头。 jscs: [`requireDollarBeforejQueryAssignment`](http://jscs.info/rule/requireDollarBeforejQueryAssignment)
 
     ```javascript
-    // bad
+    // 坏
     const sidebar = $('.sidebar');
 
-    // good
+    // 好
     const $sidebar = $('.sidebar');
 
-    // good
+    // 好
     const $sidebarBtn = $('.sidebar-btn');
     ```
 
   <a name="jquery--cache"></a><a name="25.2"></a>
-  - [26.2](#jquery--cache) Cache jQuery lookups.
+  
+  - [26.2](#jquery--cache) 缓存 jQuery 查收。
 
     ```javascript
-    // bad
+    // 坏
     function setSidebar() {
       $('.sidebar').hide();
 
@@ -3188,7 +3190,7 @@
       });
     }
 
-    // good
+    // 好
     function setSidebar() {
       const $sidebar = $('.sidebar');
       $sidebar.hide();
@@ -3202,29 +3204,31 @@
     ```
 
   <a name="jquery--queries"></a><a name="25.3"></a>
-  - [26.3](#jquery--queries) For DOM queries use Cascading `$('.sidebar ul')` or parent > child `$('.sidebar > ul')`. [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
+  
+  - [26.3](#jquery--queries) 使用联级`$('.sidebar ul')`或父子选择器`$('.sidebar > ul')`进行DOM查找。[jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
 
   <a name="jquery--find"></a><a name="25.4"></a>
-  - [26.4](#jquery--find) Use `find` with scoped jQuery object queries.
+  
+  - [26.4](#jquery--find) jQuery对象范围内使用 `find` 查找。
 
     ```javascript
-    // bad
+    // 坏
     $('ul', '.sidebar').hide();
 
-    // bad
+    // 坏
     $('.sidebar').find('ul').hide();
 
-    // good
+    // 好
     $('.sidebar ul').hide();
 
-    // good
+    // 好
     $('.sidebar > ul').hide();
 
-    // good
+    // 好
     $sidebar.find('ul').hide();
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## ECMAScript 5 Compatibility
