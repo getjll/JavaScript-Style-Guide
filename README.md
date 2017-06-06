@@ -3047,19 +3047,21 @@
     ];
     ```
 
-**[⬆ 更好](#table-of-contents)**
+**[⬆ 返回顶部](#table-of-contents)**
 
 
-## Accessors
+## 访问器
 
   <a name="accessors--not-required"></a><a name="23.1"></a>
-  - [24.1](#accessors--not-required) Accessor functions for properties are not required.
+  
+  - [24.1](#accessors--not-required) 属性的访问器函数不是必须的。
 
   <a name="accessors--no-getters-setters"></a><a name="23.2"></a>
-  - [24.2](#accessors--no-getters-setters) Do not use JavaScript getters/setters as they cause unexpected side effects and are harder to test, maintain, and reason about. Instead, if you do make accessor functions, use getVal() and setVal('hello').
+  
+  - [24.2](#accessors--no-getters-setters) JavaScript不使用相同的getter和setter，这会引起意想不到的副作用，很难测试、维护等的原因。相反的， 如果你需要定义访问器函数，请使用 getVal() 和 setVal('hello').
 
     ```javascript
-    // bad
+    // 坏
     class Dragon {
       get age() {
         // ...
@@ -3070,7 +3072,7 @@
       }
     }
 
-    // good
+    // 好
     class Dragon {
       getAge() {
         // ...
@@ -3083,22 +3085,24 @@
     ```
 
   <a name="accessors--boolean-prefix"></a><a name="23.3"></a>
-  - [24.3](#accessors--boolean-prefix) If the property/method is a `boolean`, use `isVal()` or `hasVal()`.
+  
+  - [24.3](#accessors--boolean-prefix) 如果属性／方法的结果是布尔值，使用 `isVal()` 或 `hasVal()`.
 
     ```javascript
-    // bad
+    // 坏
     if (!dragon.age()) {
       return false;
     }
 
-    // good
+    // 好
     if (!dragon.hasAge()) {
       return false;
     }
     ```
 
   <a name="accessors--consistent"></a><a name="23.4"></a>
-  - [24.4](#accessors--consistent) It's okay to create get() and set() functions, but be consistent.
+  
+  - [24.4](#accessors--consistent) 创建 get() 和 set() 函数是可以的，但要保持一致。
 
     ```javascript
     class Jedi {
@@ -3117,7 +3121,7 @@
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 
 ## Events
