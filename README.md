@@ -3124,10 +3124,11 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Events
+## 事件
 
   <a name="events--hash"></a><a name="24.1"></a>
-  - [25.1](#events--hash) When attaching data payloads to events (whether DOM events or something more proprietary like Backbone events), pass a hash instead of a raw value. This allows a subsequent contributor to add more data to the event payload without finding and updating every handler for the event. For example, instead of:
+  
+  - [25.1](#events--hash) 当事件需要传递额外数据时，(无论是 DOM 事件还是私有事件)， 传递一个散列而不是原始值。 这允许后面的开发者添加更多参数的同时，不需要更新事件的每一个回调函数。 举个例子, 不好的:
 
     ```javascript
     // bad
@@ -3140,7 +3141,7 @@
     });
     ```
 
-    prefer:
+    好的:
 
     ```javascript
     // good
@@ -3153,7 +3154,7 @@
     });
     ```
 
-  **[⬆ back to top](#table-of-contents)**
+  **[⬆ 回到顶部](#table-of-contents)**
 
 
 ## jQuery
