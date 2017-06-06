@@ -2912,7 +2912,7 @@
   
   - [23.4](#naming--leading-underscore) 前后不适用下划线。 eslint: [`no-underscore-dangle`](http://eslint.org/docs/rules/no-underscore-dangle.html) jscs: [`disallowDanglingUnderscores`](http://jscs.info/rule/disallowDanglingUnderscores)
 
-    > 为什么? 虽然大家约定下划线代表“私有”，但事实上它们仍然是公有的属性和方法。这个约定导致开发人员错误的理解是不会改变的，并且测试不是必需的。tl;dr: 如果你想要一个“私有”，它必须是不能显著存在的。
+    > 为什么? 因为JavaScript中对于属性或方法没有私有的概念，尽管大家约定下划线表示“私有”，但实际上，JS中这些属性完全是对外公开的。依照这种传统的惯例，会误导开发者认为对这些做改变并不会破坏对外API的约定，或者不需要对改变进行测试。简单来说： 如果想进行私有化，必须要保证外部不可访问。
 
     ```javascript
     // 不好
