@@ -2250,24 +2250,24 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Whitespace
+## 空白
 
   <a name="whitespace--spaces"></a><a name="18.1"></a>
   
-  - [19.1](#whitespace--spaces) Use soft tabs (space character) set to 2 spaces. eslint: [`indent`](http://eslint.org/docs/rules/indent.html) jscs: [`validateIndentation`](http://jscs.info/rule/validateIndentation)
+  - [19.1](#whitespace--spaces) 使用2个空格的soft tabs (空格字符)。 eslint: [`indent`](http://eslint.org/docs/rules/indent.html) jscs: [`validateIndentation`](http://jscs.info/rule/validateIndentation)
 
     ```javascript
-    // bad
+    // 不好的
     function foo() {
     ∙∙∙∙let name;
     }
 
-    // bad
+    // 不好的
     function bar() {
     ∙let name;
     }
 
-    // good
+    // 好的
     function baz() {
     ∙∙let name;
     }
@@ -2275,26 +2275,26 @@
 
   <a name="whitespace--before-blocks"></a><a name="18.2"></a>
   
-  - [19.2](#whitespace--before-blocks) Place 1 space before the leading brace. eslint: [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks.html) jscs: [`requireSpaceBeforeBlockStatements`](http://jscs.info/rule/requireSpaceBeforeBlockStatements)
+  - [19.2](#whitespace--before-blocks) 在开始括号的前面添加一个空格。 eslint: [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks.html) jscs: [`requireSpaceBeforeBlockStatements`](http://jscs.info/rule/requireSpaceBeforeBlockStatements)
 
     ```javascript
-    // bad
+    // 不好的
     function test(){
       console.log('test');
     }
 
-    // good
+    // 好的
     function test() {
       console.log('test');
     }
 
-    // bad
+    // 不好
     dog.set('attr',{
       age: '1 year',
       breed: 'Bernese Mountain Dog',
     });
 
-    // good
+    // 好
     dog.set('attr', {
       age: '1 year',
       breed: 'Bernese Mountain Dog',
@@ -2303,25 +2303,25 @@
 
   <a name="whitespace--around-keywords"></a><a name="18.3"></a>
   
-  - [19.3](#whitespace--around-keywords) Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space between the argument list and the function name in function calls and declarations. eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing.html) jscs: [`requireSpaceAfterKeywords`](http://jscs.info/rule/requireSpaceAfterKeywords)
+  - [19.3](#whitespace--around-keywords) 在控制语句的前括号中放置1个空格 (`if`, `while`等。)。在函数调用和声明之间没有参数列表和函数名之间的空格。 eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing.html) jscs: [`requireSpaceAfterKeywords`](http://jscs.info/rule/requireSpaceAfterKeywords)
 
     ```javascript
-    // bad
+    // 不好
     if(isJedi) {
       fight ();
     }
 
-    // good
+    // 好
     if (isJedi) {
       fight();
     }
 
-    // bad
+    // 不好
     function fight () {
       console.log ('Swooosh!');
     }
 
-    // good
+    // 好
     function fight() {
       console.log('Swooosh!');
     }
@@ -2329,29 +2329,29 @@
 
   <a name="whitespace--infix-ops"></a><a name="18.4"></a>
   
-  - [19.4](#whitespace--infix-ops) Set off operators with spaces. eslint: [`space-infix-ops`](http://eslint.org/docs/rules/space-infix-ops.html) jscs: [`requireSpaceBeforeBinaryOperators`](http://jscs.info/rule/requireSpaceBeforeBinaryOperators), [`requireSpaceAfterBinaryOperators`](http://jscs.info/rule/requireSpaceAfterBinaryOperators)
+  - [19.4](#whitespace--infix-ops) 运算符添加空格。 eslint: [`space-infix-ops`](http://eslint.org/docs/rules/space-infix-ops.html) jscs: [`requireSpaceBeforeBinaryOperators`](http://jscs.info/rule/requireSpaceBeforeBinaryOperators), [`requireSpaceAfterBinaryOperators`](http://jscs.info/rule/requireSpaceAfterBinaryOperators)
 
     ```javascript
-    // bad
+    // 不好
     const x=y+5;
 
-    // good
+    // 好的
     const x = y + 5;
     ```
 
   <a name="whitespace--newline-at-end"></a><a name="18.5"></a>
   
-  - [19.5](#whitespace--newline-at-end) End files with a single newline character. eslint: [`eol-last`](https://github.com/eslint/eslint/blob/master/docs/rules/eol-last.md)
+  - [19.5](#whitespace--newline-at-end) 文件结尾添加一个换行符。 eslint: [`eol-last`](https://github.com/eslint/eslint/blob/master/docs/rules/eol-last.md)
 
     ```javascript
-    // bad
+    // 不好
     import { es6 } from './AirbnbStyleGuide';
       // ...
     export default es6;
     ```
 
     ```javascript
-    // bad
+    // 不好
     import { es6 } from './AirbnbStyleGuide';
       // ...
     export default es6;↵
@@ -2359,7 +2359,7 @@
     ```
 
     ```javascript
-    // good
+    // 好
     import { es6 } from './AirbnbStyleGuide';
       // ...
     export default es6;↵
@@ -2367,14 +2367,13 @@
 
   <a name="whitespace--chains"></a><a name="18.6"></a>
   
-  - [19.6](#whitespace--chains) Use indentation when making long method chains (more than 2 method chains). Use a leading dot, which
-    emphasizes that the line is a method call, not a new statement. eslint: [`newline-per-chained-call`](http://eslint.org/docs/rules/newline-per-chained-call) [`no-whitespace-before-property`](http://eslint.org/docs/rules/no-whitespace-before-property)
+  - [19.6](#whitespace--chains)在使用长方法链时使用缩进（超过2个方法链）。 点前置， 它强调该行是方法调用，而不是新语句。 eslint: [`newline-per-chained-call`](http://eslint.org/docs/rules/newline-per-chained-call) [`no-whitespace-before-property`](http://eslint.org/docs/rules/no-whitespace-before-property)
 
     ```javascript
-    // bad
+    // 糟糕
     $('#items').find('.selected').highlight().end().find('.open').updateCount();
 
-    // bad
+    // 糟糕
     $('#items').
       find('.selected').
         highlight().
@@ -2382,7 +2381,7 @@
       find('.open').
         updateCount();
 
-    // good
+    // 好
     $('#items')
       .find('.selected')
         .highlight()
@@ -2390,13 +2389,13 @@
       .find('.open')
         .updateCount();
 
-    // bad
+    // 糟糕
     const leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
         .attr('width', (radius + margin) * 2).append('svg:g')
         .attr('transform', `translate(${radius + margin},${radius + margin})`)
         .call(tron.led);
 
-    // good
+    // 好
     const leds = stage.selectAll('.led')
         .data(data)
       .enter().append('svg:svg')
@@ -2406,29 +2405,29 @@
         .attr('transform', `translate(${radius + margin},${radius + margin})`)
         .call(tron.led);
 
-    // good
+    // 好
     const leds = stage.selectAll('.led').data(data);
     ```
 
   <a name="whitespace--after-blocks"></a><a name="18.7"></a>
   
-  - [19.7](#whitespace--after-blocks) Leave a blank line after blocks and before the next statement. jscs: [`requirePaddingNewLinesAfterBlocks`](http://jscs.info/rule/requirePaddingNewLinesAfterBlocks)
+  - [19.7](#whitespace--after-blocks) 在空白块和下一个语句之前留下空白行。 jscs: [`requirePaddingNewLinesAfterBlocks`](http://jscs.info/rule/requirePaddingNewLinesAfterBlocks)
 
     ```javascript
-    // bad
+    // 不好
     if (foo) {
       return bar;
     }
     return baz;
 
-    // good
+    // 好
     if (foo) {
       return bar;
     }
 
     return baz;
 
-    // bad
+    // 不好
     const obj = {
       foo() {
       },
@@ -2437,7 +2436,7 @@
     };
     return obj;
 
-    // good
+    // 好
     const obj = {
       foo() {
       },
@@ -2448,7 +2447,7 @@
 
     return obj;
 
-    // bad
+    // 不好
     const arr = [
       function foo() {
       },
@@ -2457,7 +2456,7 @@
     ];
     return arr;
 
-    // good
+    // 好
     const arr = [
       function foo() {
       },
@@ -2471,17 +2470,17 @@
 
   <a name="whitespace--padded-blocks"></a><a name="18.8"></a>
   
-  - [19.8](#whitespace--padded-blocks) Do not pad your blocks with blank lines. eslint: [`padded-blocks`](http://eslint.org/docs/rules/padded-blocks.html) jscs:  [`disallowPaddingNewlinesInBlocks`](http://jscs.info/rule/disallowPaddingNewlinesInBlocks)
+  - [19.8](#whitespace--padded-blocks) 不要在代码块头部添加空白行。 eslint: [`padded-blocks`](http://eslint.org/docs/rules/padded-blocks.html) jscs:  [`disallowPaddingNewlinesInBlocks`](http://jscs.info/rule/disallowPaddingNewlinesInBlocks)
 
     ```javascript
-    // bad
+    // 不好
     function bar() {
 
       console.log(foo);
 
     }
 
-    // also bad
+    // 同样不好
     if (baz) {
 
       console.log(qux);
@@ -2490,12 +2489,12 @@
 
     }
 
-    // good
+    // 好的
     function bar() {
       console.log(foo);
     }
 
-    // good
+    // 好的
     if (baz) {
       console.log(qux);
     } else {
@@ -2505,25 +2504,25 @@
 
   <a name="whitespace--in-parens"></a><a name="18.9"></a>
   
-  - [19.9](#whitespace--in-parens) Do not add spaces inside parentheses. eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens.html) jscs: [`disallowSpacesInsideParentheses`](http://jscs.info/rule/disallowSpacesInsideParentheses)
+  - [19.9](#whitespace--in-parens) 在圆括号内边添加空格。 eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens.html) jscs: [`disallowSpacesInsideParentheses`](http://jscs.info/rule/disallowSpacesInsideParentheses)
 
     ```javascript
-    // bad
+    // 坏
     function bar( foo ) {
       return foo;
     }
 
-    // good
+    // 好
     function bar(foo) {
       return foo;
     }
 
-    // bad
+    // 坏
     if ( foo ) {
       console.log(foo);
     }
 
-    // good
+    // 好
     if (foo) {
       console.log(foo);
     }
@@ -2531,44 +2530,44 @@
 
   <a name="whitespace--in-brackets"></a><a name="18.10"></a>
   
-  - [19.10](#whitespace--in-brackets) Do not add spaces inside brackets. eslint: [`array-bracket-spacing`](http://eslint.org/docs/rules/array-bracket-spacing.html) jscs: [`disallowSpacesInsideArrayBrackets`](http://jscs.info/rule/disallowSpacesInsideArrayBrackets)
+  - [19.10](#whitespace--in-brackets) 在括号内边添加空格。 eslint: [`array-bracket-spacing`](http://eslint.org/docs/rules/array-bracket-spacing.html) jscs: [`disallowSpacesInsideArrayBrackets`](http://jscs.info/rule/disallowSpacesInsideArrayBrackets)
 
     ```javascript
-    // bad
+    // 坏
     const foo = [ 1, 2, 3 ];
     console.log(foo[ 0 ]);
 
-    // good
+    // 好
     const foo = [1, 2, 3];
     console.log(foo[0]);
     ```
 
   <a name="whitespace--in-braces"></a><a name="18.11"></a>
   
-  - [19.11](#whitespace--in-braces) Add spaces inside curly braces. eslint: [`object-curly-spacing`](http://eslint.org/docs/rules/object-curly-spacing.html) jscs: [`requireSpacesInsideObjectBrackets`](http://jscs.info/rule/requireSpacesInsideObjectBrackets)
+  - [19.11](#whitespace--in-braces) 大括号内边添加空格。eslint: [`object-curly-spacing`](http://eslint.org/docs/rules/object-curly-spacing.html) jscs: [`requireSpacesInsideObjectBrackets`](http://jscs.info/rule/requireSpacesInsideObjectBrackets)
 
     ```javascript
-    // bad
+    // 坏
     const foo = {clark: 'kent'};
 
-    // good
+    // 好
     const foo = { clark: 'kent' };
     ```
 
   <a name="whitespace--max-len"></a><a name="18.12"></a>
   
-  - [19.12](#whitespace--max-len) Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per [above](#strings--line-length), long strings are exempt from this rule, and should not be broken up. eslint: [`max-len`](http://eslint.org/docs/rules/max-len.html) jscs: [`maximumLineLength`](http://jscs.info/rule/maximumLineLength)
+  - [19.12](#whitespace--max-len) 避免一行过长超过100个字符（包括空格）。 注意: 长字符串免除当前规则，不能打破字符串的[规则](#strings--line-length) eslint: [`max-len`](http://eslint.org/docs/rules/max-len.html) jscs: [`maximumLineLength`](http://jscs.info/rule/maximumLineLength)
 
-    > Why? This ensures readability and maintainability.
+    > 为什么? 保证可读性和可维护性。
 
     ```javascript
-    // bad
+    // 坏
     const foo = jsonData && jsonData.foo && jsonData.foo.bar && jsonData.foo.bar.baz && jsonData.foo.bar.baz.quux && jsonData.foo.bar.baz.quux.xyzzy;
 
-    // bad
+    // 坏
     $.ajax({ method: 'POST', url: 'https://airbnb.com/', data: { name: 'John' } }).done(() => console.log('Congratulations!')).fail(() => console.log('You have failed this city.'));
 
-    // good
+    // 好
     const foo = jsonData
       && jsonData.foo
       && jsonData.foo.bar
@@ -2576,7 +2575,7 @@
       && jsonData.foo.bar.baz.quux
       && jsonData.foo.bar.baz.quux.xyzzy;
 
-    // good
+    // 好
     $.ajax({
       method: 'POST',
       url: 'https://airbnb.com/',
@@ -2586,7 +2585,7 @@
       .fail(() => console.log('You have failed this city.'));
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#table-of-contents)**
 
 ## Commas
 
