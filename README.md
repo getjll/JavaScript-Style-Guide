@@ -2849,42 +2849,45 @@
 **[⬆ 回到顶部](#table-of-contents)**
 
 
-## Naming Conventions
+## 命名规则
 
   <a name="naming--descriptive"></a><a name="22.1"></a>
-  - [23.1](#naming--descriptive) Avoid single letter names. Be descriptive with your naming. eslint: [`id-length`](http://eslint.org/docs/rules/id-length)
+  
+  - [23.1](#naming--descriptive) 避免单字母名。描述你的命名。eslint: [`id-length`](http://eslint.org/docs/rules/id-length)
 
     ```javascript
-    // bad
+    // 不好
     function q() {
       // ...
     }
 
-    // good
+    // 好
     function query() {
       // ...
     }
     ```
 
   <a name="naming--camelCase"></a><a name="22.2"></a>
-  - [23.2](#naming--camelCase) Use camelCase when naming objects, functions, and instances. eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase.html) jscs: [`requireCamelCaseOrUpperCaseIdentifiers`](http://jscs.info/rule/requireCamelCaseOrUpperCaseIdentifiers)
+  
+  - [23.2](#naming--camelCase) 使用驼峰命名法命名对象、函数、实例。 eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase.html) jscs: [`requireCamelCaseOrUpperCaseIdentifiers`](http://jscs.info/rule/requireCamelCaseOrUpperCaseIdentifiers)
 
     ```javascript
-    // bad
+    // 不好
     const OBJEcttsssss = {};
     const this_is_my_object = {};
     function c() {}
 
-    // good
+    // 好的
     const thisIsMyObject = {};
     function thisIsMyFunction() {}
     ```
 
   <a name="naming--PascalCase"></a><a name="22.3"></a>
-  - [23.3](#naming--PascalCase) Use PascalCase only when naming constructors or classes. eslint: [`new-cap`](http://eslint.org/docs/rules/new-cap.html) jscs: [`requireCapitalizedConstructors`](http://jscs.info/rule/requireCapitalizedConstructors)
+
+  - [23.3](#naming--PascalCase) 命名构造函数或类只使用帕斯卡拼写法。 eslint: [`new-cap`](http://eslint.org/docs/rules/new-cap.html) jscs: [`requireCapitalizedConstructors`](http://jscs.info/rule/requireCapitalizedConstructors)
 
     ```javascript
-    // bad
+    // 坏
     function user(options) {
       this.name = options.name;
     }
@@ -2893,7 +2896,7 @@
       name: 'nope',
     });
 
-    // good
+    // 好
     class User {
       constructor(options) {
         this.name = options.name;
@@ -2906,25 +2909,27 @@
     ```
 
   <a name="naming--leading-underscore"></a><a name="22.4"></a>
-  - [23.4](#naming--leading-underscore) Do not use trailing or leading underscores. eslint: [`no-underscore-dangle`](http://eslint.org/docs/rules/no-underscore-dangle.html) jscs: [`disallowDanglingUnderscores`](http://jscs.info/rule/disallowDanglingUnderscores)
+  
+  - [23.4](#naming--leading-underscore) 前后不适用下划线。 eslint: [`no-underscore-dangle`](http://eslint.org/docs/rules/no-underscore-dangle.html) jscs: [`disallowDanglingUnderscores`](http://jscs.info/rule/disallowDanglingUnderscores)
 
-    > Why? JavaScript does not have the concept of privacy in terms of properties or methods. Although a leading underscore is a common convention to mean “private”, in fact, these properties are fully public, and as such, are part of your public API contract. This convention might lead developers to wrongly think that a change won't count as breaking, or that tests aren't needed. tl;dr: if you want something to be “private”, it must not be observably present.
+    > 为什么? 虽然大家约定下划线代表“私有”，但事实上它们仍然是公有的属性和方法。这个约定导致开发人员错误的理解是不会改变的，并且测试不是必需的。tl;dr: 如果你想要一个“私有”，它必须是不能显著存在的。
 
     ```javascript
-    // bad
+    // 不好
     this.__firstName__ = 'Panda';
     this.firstName_ = 'Panda';
     this._firstName = 'Panda';
 
-    // good
+    // 好
     this.firstName = 'Panda';
     ```
 
   <a name="naming--self-this"></a><a name="22.5"></a>
-  - [23.5](#naming--self-this) Don't save references to `this`. Use arrow functions or [Function#bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind). jscs: [`disallowNodeTypes`](http://jscs.info/rule/disallowNodeTypes)
+  
+  - [23.5](#naming--self-this) 不用缓存 `this`。使用箭头函数或[Function#bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)。 jscs: [`disallowNodeTypes`](http://jscs.info/rule/disallowNodeTypes)
 
     ```javascript
-    // bad
+    // 坏
     function foo() {
       const self = this;
       return function () {
@@ -2932,7 +2937,7 @@
       };
     }
 
-    // bad
+    // 坏
     function foo() {
       const that = this;
       return function () {
@@ -2940,7 +2945,7 @@
       };
     }
 
-    // good
+    // 好
     function foo() {
       return () => {
         console.log(this);
@@ -2949,35 +2954,36 @@
     ```
 
   <a name="naming--filename-matches-export"></a><a name="22.6"></a>
-  - [23.6](#naming--filename-matches-export) A base filename should exactly match the name of its default export.
+  
+  - [23.6](#naming--filename-matches-export) 文件名应与其默认导出名称完全匹配。
 
     ```javascript
-    // file 1 contents
+    // 文件 1 内容
     class CheckBox {
       // ...
     }
     export default CheckBox;
 
-    // file 2 contents
+    // 文件 2 内容
     export default function fortyTwo() { return 42; }
 
-    // file 3 contents
+    // 文件 3 内容
     export default function insideDirectory() {}
 
-    // in some other file
-    // bad
+    // 在其他文件中
+    // 坏
     import CheckBox from './checkBox'; // PascalCase import/export, camelCase filename
     import FortyTwo from './FortyTwo'; // PascalCase import/filename, camelCase export
     import InsideDirectory from './InsideDirectory'; // PascalCase import/filename, camelCase export
 
-    // bad
+    // 坏
     import CheckBox from './check_box'; // PascalCase import/export, snake_case filename
     import forty_two from './forty_two'; // snake_case import/filename, camelCase export
     import inside_directory from './inside_directory'; // snake_case import, camelCase export
     import index from './inside_directory/index'; // requiring the index file explicitly
     import insideDirectory from './insideDirectory/index'; // requiring the index file explicitly
 
-    // good
+    // 好
     import CheckBox from './CheckBox'; // PascalCase export/import/filename
     import fortyTwo from './fortyTwo'; // camelCase export/import/filename
     import insideDirectory from './insideDirectory'; // camelCase export/import/directory name/implicit "index"
@@ -2985,7 +2991,8 @@
     ```
 
   <a name="naming--camelCase-default-export"></a><a name="22.7"></a>
-  - [23.7](#naming--camelCase-default-export) Use camelCase when you export-default a function. Your filename should be identical to your function's name.
+  
+  - [23.7](#naming--camelCase-default-export) 模块默认导出函数时使用驼峰命名法，并且模块名字相同。
 
     ```javascript
     function makeStyleGuide() {
@@ -2996,7 +3003,8 @@
     ```
 
   <a name="naming--PascalCase-singleton"></a><a name="22.8"></a>
-  - [23.8](#naming--PascalCase-singleton) Use PascalCase when you export a constructor / class / singleton / function library / bare object.
+  
+  - [23.8](#naming--PascalCase-singleton) 模块导出a constructor / class / singleton / function library / bare object使用帕斯卡拼写法。
 
     ```javascript
     const AirbnbStyleGuide = {
@@ -3008,37 +3016,38 @@
     ```
 
   <a name="naming--Acronyms-and-Initialisms"></a>
-  - [23.9](#naming--Acronyms-and-Initialisms) Acronyms and initialisms should always be all capitalized, or all lowercased.
+  
+  - [23.9](#naming--Acronyms-and-Initialisms) 缩略词应全部大写或小写。
 
-    > Why? Names are for readability, not to appease a computer algorithm.
+    > 为什么? 名字是为了可读性，不是为了安抚电脑算法。
 
     ```javascript
-    // bad
+    // 坏
     import SmsContainer from './containers/SmsContainer';
 
-    // bad
+    // 坏
     const HttpRequests = [
       // ...
     ];
 
-    // good
+    // 好
     import SMSContainer from './containers/SMSContainer';
 
-    // good
+    // 好
     const HTTPRequests = [
       // ...
     ];
 
-    // best
+    // 更好
     import TextMessageContainer from './containers/TextMessageContainer';
 
-    // best
+    // 更好
     const Requests = [
       // ...
     ];
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 更好](#table-of-contents)**
 
 
 ## Accessors
