@@ -461,7 +461,7 @@
     1, 2,
   ];
 
-  // good
+  // 好
   const arr = [[0, 1], [2, 3], [4, 5]];
 
   const objectInArray = [
@@ -542,7 +542,7 @@
     // 调用方需要考虑返回的顺序
     const [left, __, top] = processInput(input);
 
-    // good
+    // 好
     function processInput(input) {
       // 见证奇迹的时刻
       return { left, right, top, bottom };
@@ -2645,7 +2645,7 @@
     +    inventorOf: ['coxcomb chart', 'modern nursing']
     };
 
-    // good - git diff 有尾随逗号
+    // 好 - git diff 有尾随逗号
     const hero = {
          firstName: 'Florence',
          lastName: 'Nightingale',
@@ -3131,7 +3131,7 @@
   - [25.1](#events--hash) 当事件需要传递额外数据时，(无论是 DOM 事件还是私有事件)， 传递一个散列而不是原始值。 这允许后面的开发者添加更多参数的同时，不需要更新事件的每一个回调函数。 举个例子, 不好的:
 
     ```javascript
-    // bad
+    // 不好的
     $(this).trigger('listingUpdated', listing.id);
 
     // ...
@@ -3144,7 +3144,7 @@
     好的:
 
     ```javascript
-    // good
+    // 好
     $(this).trigger('listingUpdated', { listingId: listing.id });
 
     // ...
