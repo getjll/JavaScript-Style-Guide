@@ -989,20 +989,20 @@
       [index]: number,
     }));
 
-    // No implicit return with side effects
+    // 隐形返回有一定的副作用
     function foo(callback) {
       const val = callback();
       if (val === true) {
-        // Do something if callback returns true
+        // 在回调返回为 true 时执行
       }
     }
 
     let bool = false;
 
-    // bad
+    // 坏
     foo(() => bool = true);
 
-    // good
+    // 好
     foo(() => {
       bool = true;
     });
