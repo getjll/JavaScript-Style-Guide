@@ -988,6 +988,24 @@
     [1, 2, 3].map((number, index) => ({
       [index]: number,
     }));
+
+    // No implicit return with side effects
+    function foo(callback) {
+      const val = callback();
+      if (val === true) {
+        // Do something if callback returns true
+      }
+    }
+
+    let bool = false;
+
+    // bad
+    foo(() => bool = true);
+
+    // good
+    foo(() => {
+      bool = true;
+    });
     ```
 
   <a name="arrows--paren-wrap"></a><a name="8.3"></a>
@@ -1419,7 +1437,9 @@
 
     // 好
     let sum = 0;
-    numbers.forEach(num => sum += num);
+    numbers.forEach((num) => {
+      sum += num;
+    });
     sum === 15;
 
     // 更好 (使用函数功能)
@@ -1434,7 +1454,9 @@
 
     // 好的
     const increasedByOne = [];
-    numbers.forEach(num => increasedByOne.push(num + 1));
+    numbers.forEach((num) => {
+      increasedByOne.push(num + 1);
+    );
 
     // 更好 (保持它的功能)
     const increasedByOne = numbers.map(num => num + 1);
@@ -1665,7 +1687,7 @@
       let a = b = c = 1;
     }());
 
-    console.log(a); // undefined
+    console.log(a); // throws ReferenceError
     console.log(b); // 1
     console.log(c); // 1
 
@@ -1676,9 +1698,9 @@
       let c = a;
     }());
 
-    console.log(a); // undefined
-    console.log(b); // undefined
-    console.log(c); // undefined
+    console.log(a); // throws ReferenceError
+    console.log(b); // throws ReferenceError
+    console.log(c); // throws ReferenceError
 
     // `const`也是同样的
     ```
@@ -3341,7 +3363,7 @@
   - [Third Party JavaScript](https://www.manning.com/books/third-party-javascript) - Ben Vinegar and Anton Kovalyov
   - [Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript](http://amzn.com/0321812182) - David Herman
   - [Eloquent JavaScript](http://eloquentjavascript.net/) - Marijn Haverbeke
-  - [You Don't Know JS: ES6 & Beyond](http://shop.oreilly.com/product/0636920033769.do) - Kyle Simpson
+  - [You Don’t Know JS: ES6 & Beyond](http://shop.oreilly.com/product/0636920033769.do) - Kyle Simpson
 
 **博客**
 
