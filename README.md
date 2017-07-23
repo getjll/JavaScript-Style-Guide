@@ -98,7 +98,7 @@
     console.log(foo[0], bar[0]); // => 9, 9
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 引用
 
@@ -152,7 +152,7 @@
     console.log(b); // ReferenceError
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 对象
 
@@ -334,7 +334,7 @@
     const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 数组
 
@@ -479,7 +479,7 @@
   ];
   ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 解构
 
@@ -552,7 +552,7 @@
     const { left, top } = processInput(input);
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 字符串
 
@@ -641,7 +641,7 @@
     const foo = `my name is '${name}'`;
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 函数
 
@@ -936,7 +936,7 @@
     );
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 箭头函数
 
@@ -1083,7 +1083,7 @@
     };
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 类和构造函数
 
@@ -1253,7 +1253,7 @@
     }
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 模块
 
@@ -1413,7 +1413,7 @@
     import barCss from 'bar.css';
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 迭代器和生成器
 
@@ -1530,7 +1530,7 @@
     };
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 属性
 
@@ -1567,7 +1567,7 @@
     const isJedi = getProp('jedi');
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 变量
 
@@ -1740,7 +1740,7 @@
     const truthyCount = array.filter(Boolean).length;
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 变量提升
 
@@ -1839,7 +1839,7 @@
 
   - 更多信息参考[Ben Cherry](http://www.adequatelygood.com/)的[JavaScript Scoping & Hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting/)。
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 比较运算符 & 相等
 
@@ -1998,7 +1998,7 @@
     const baz = !c;
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 代码块
 
@@ -2051,7 +2051,7 @@
     }
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 控制语句
 
@@ -2108,7 +2108,7 @@
     }
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 注释
 
@@ -2253,7 +2253,7 @@
     }
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 空白
 
@@ -2590,7 +2590,7 @@
       .fail(() => console.log('You have failed this city.'));
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 逗号
 
@@ -2727,7 +2727,7 @@
     );
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 分号
 
@@ -2757,7 +2757,7 @@
 
     [查看更多](https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function/7365214%237365214).
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 类型转换
 
@@ -2849,7 +2849,7 @@
     const hasAge = !!age;
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 命名规则
 
@@ -3122,7 +3122,7 @@
     }
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 事件
 
@@ -3154,7 +3154,7 @@
     });
     ```
 
-  **[⬆ 回到顶部](#table-of-contents)**
+  **[⬆ 回到目录](#table-of-contents)**
 
 ## jQuery
 
@@ -3227,7 +3227,7 @@
     $sidebar.find('ul').hide();
     ```
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## ECMAScript 5 兼容性
 
@@ -3235,7 +3235,7 @@
 
   - [27.1](#es5-compat--kangax) 参考 [Kangax](https://twitter.com/kangax/) 的 ES5 [兼容性表格](https://kangax.github.io/es5-compat-table/).
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 <a name="ecmascript-6-styles"></a>
 ## ECMAScript 6+ (ES 2015+) 风格
@@ -3264,7 +3264,7 @@
 
     > 为什么? [他们还没有最终采用](https://tc39.github.io/process-document/)，他们还没有被最终采用，很可能发生改变，甚至整个被取消掉。我们要使用JavaScript语言，而不是那些提议，那些提议还没有变成语言的一部分。
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 测试
 
@@ -3288,7 +3288,7 @@
    - 争取100%测试覆盖率是一个很好的目标，即使它不是总能达到。
    - 每当你修复一个bug，_写一个回归测试_。一个没有测试的bug，迟早会重现。
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 性能
 
@@ -3302,7 +3302,7 @@
   - [Are Javascript functions like `map()`, `reduce()`, and `filter()` optimized for traversing arrays?](https://www.quora.com/JavaScript-programming-language-Are-Javascript-functions-like-map-reduce-and-filter-already-optimized-for-traversing-array/answer/Quildreen-Motta)
   - 更多待添加...
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 相关资源
 
@@ -3383,7 +3383,7 @@
   - [JavaScript Air](https://javascriptair.com/)
   - [JavaScript Jabber](https://devchat.tv/js-jabber/)
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 谁使用了
 
@@ -3535,7 +3535,7 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-**[⬆ 回到顶部](#table-of-contents)**
+**[⬆ 回到目录](#table-of-contents)**
 
 ## 修改
 
