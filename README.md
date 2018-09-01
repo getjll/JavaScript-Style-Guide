@@ -2974,22 +2974,22 @@
 
     // 在其他文件中
     // 坏
-    import CheckBox from './checkBox'; // PascalCase import/export, camelCase filename
-    import FortyTwo from './FortyTwo'; // PascalCase import/filename, camelCase export
-    import InsideDirectory from './InsideDirectory'; // PascalCase import/filename, camelCase export
+    import CheckBox from './checkBox'; // 帕斯卡命名法（PascalCase） 导入/导出, 驼峰（camelCase）文件名
+    import FortyTwo from './FortyTwo'; // 帕斯卡命名法 导入/定义文件名, 驼峰导出
+    import InsideDirectory from './InsideDirectory'; // 帕斯卡命名法 导入/定义文件名, 驼峰导出
 
     // 坏
-    import CheckBox from './check_box'; // PascalCase import/export, snake_case filename
-    import forty_two from './forty_two'; // snake_case import/filename, camelCase export
-    import inside_directory from './inside_directory'; // snake_case import, camelCase export
-    import index from './inside_directory/index'; // requiring the index file explicitly
-    import insideDirectory from './insideDirectory/index'; // requiring the index file explicitly
+    import CheckBox from './check_box'; // 帕斯卡命名法 导入/导出, 蛇形命名法（snake_case）定义文件名
+    import forty_two from './forty_two'; // 蛇形命名法 导入/定义文件名, 驼峰导出
+    import inside_directory from './inside_directory'; // 蛇形命名法 导入,驼峰导出
+    import index from './inside_directory/index'; // 记载index文件是确定的
+    import insideDirectory from './insideDirectory/index'; // 记载index文件是确定的
 
     // 好
-    import CheckBox from './CheckBox'; // PascalCase export/import/filename
-    import fortyTwo from './fortyTwo'; // camelCase export/import/filename
-    import insideDirectory from './insideDirectory'; // camelCase export/import/directory name/implicit "index"
-    // ^ supports both insideDirectory.js and insideDirectory/index.js
+    import CheckBox from './CheckBox'; // 帕斯卡命名法 导出/导入/定义文件名
+    import fortyTwo from './fortyTwo'; // 驼峰 导出/导入/定义文件名
+    import insideDirectory from './insideDirectory'; // 驼峰 导出/导入/定义文件夹名 名字使用隐性的"index"
+    // ^ 同事支持 insideDirectory.js 和 insideDirectory/index.js
     ```
 
   <a name="naming--camelCase-default-export"></a><a name="22.7"></a>
