@@ -1,17 +1,17 @@
-# Airbnb React/JSX Style Guide
+# Airbnb React/JSX 风格指南
 
-*A mostly reasonable approach to React and JSX*
+*更合理的编写 React 和 JSX*
 
-## Table of Contents
+## 目录
 
-  1. [Basic Rules](#basic-rules)
+  1. [基本规则](#basic-rules)
   1. [Class vs `React.createClass` vs stateless](#class-vs-reactcreateclass-vs-stateless)
-  1. [Mixins](#mixins)
-  1. [Naming](#naming)
-  1. [Declaration](#declaration)
+  1. [混合](#mixins)
+  1. [命名](#naming)
+  1. [声明](#declaration)
   1. [Alignment](#alignment)
-  1. [Quotes](#quotes)
-  1. [Spacing](#spacing)
+  1. [引号](#quotes)
+  1. [空格](#spacing)
   1. [Props](#props)
   1. [Refs](#refs)
   1. [Parentheses](#parentheses)
@@ -20,16 +20,16 @@
   1. [Ordering](#ordering)
   1. [`isMounted`](#ismounted)
 
-## Basic Rules
+## 基本规则
 
-  - Only include one React component per file.
-    - However, multiple [Stateless, or Pure, Components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) are allowed per file. eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
-  - Always use JSX syntax.
-  - Do not use `React.createElement` unless you're initializing the app from a file that is not JSX.
+  - 每个文件仅包含一个React组件。
+    - 不过，多个[无状态组件](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) 是可以的。 eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
+  - 总是使用JSX语法。
+  - 不要使用`React.createElement`，除非是从一个非JSX的文件初始化应用。
 
 ## Class vs `React.createClass` vs stateless
 
-  - If you have internal state and/or refs, prefer `class extends React.Component` over `React.createClass`. eslint: [`react/prefer-es6-class`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md) [`react/prefer-stateless-function`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md)
+  - 如果你有组件存在内部状态，请使用`class extends React.Component`而不是`React.createClass`。 eslint: [`react/prefer-es6-class`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md) [`react/prefer-stateless-function`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md)
 
     ```jsx
     // bad
@@ -49,7 +49,7 @@
     }
     ```
 
-    And if you don't have state or refs, prefer normal functions (not arrow functions) over classes:
+    同事如果是一个无状态组件，使用常规函数（非箭头行数）而不是 类：
 
     ```jsx
     // bad
@@ -59,7 +59,7 @@
       }
     }
 
-    // bad (relying on function name inference is discouraged)
+    // bad (以来函数名相关的功能将无法使用)
     const Listing = ({ hello }) => (
       <div>{hello}</div>
     );
@@ -70,17 +70,17 @@
     }
     ```
 
-## Mixins
+## 混合
 
-  - [Do not use mixins](https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html).
+  - [不要使用混合](https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html).
 
-  > Why? Mixins introduce implicit dependencies, cause name clashes, and cause snowballing complexity. Most use cases for mixins can be accomplished in better ways via components, higher-order components, or utility modules.
+  > 为什么？混合引入隐式依赖关系，可能导致名称冲突，并导致代码如滚雪球一样增加复杂性。大多数需要使用混合的场景可以通过组件、高阶组件或实用模块更好地完成。
 
-## Naming
+## 命名
 
-  - **Extensions**: Use `.jsx` extension for React components.
-  - **Filename**: Use PascalCase for filenames. E.g., `ReservationCard.jsx`.
-  - **Reference Naming**: Use PascalCase for React components and camelCase for their instances. eslint: [`react/jsx-pascal-case`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)
+  - **拓展名**: 使用`.jsx`作为React组件文件的拓展名。
+  - **文件名**: 使用帕斯卡命名法（PascalCase：单词首字母大写）。 例如： `ReservationCard.jsx`.
+  - **引用命名**: 使用帕斯卡命名法命名React组件，驼峰命名组件实例。 eslint: [`react/jsx-pascal-case`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)
 
     ```jsx
     // bad
@@ -96,7 +96,7 @@
     const reservationItem = <ReservationCard />;
     ```
 
-  - **Component Naming**: Use the filename as the component name. For example, `ReservationCard.jsx` should have a reference name of `ReservationCard`. However, for root components of a directory, use `index.jsx` as the filename and use the directory name as the component name:
+  - **组件名**: 与文件名保持相同。 举个例子, `ReservationCard.jsx` 将会命名为 `ReservationCard`。 不过, 如果根组件是在文件夹下，那么使用`index.jsx`作为文件名，使用文件夹名作为组件名：
 
     ```jsx
     // bad
@@ -108,9 +108,9 @@
     // good
     import Footer from './Footer';
     ```
-  - **Higher-order Component Naming**: Use a composite of the higher-order component's name and the passed-in component's name as the `displayName` on the generated component. For example, the higher-order component `withFoo()`, when passed a component `Bar` should produce a component with a `displayName` of `withFoo(Bar)`.
+  - **高阶组件命名**: 混合命名高阶组件的名字，同时赋给生成组件的`displayName`。 举个例子, 高阶组件 `withFoo()`, 当传入组件 `Bar` 将依据这个组件的`displayName`生成`withFoo(Bar)`。
 
-    > Why? A component's `displayName` may be used by developer tools or in error messages, and having a value that clearly expresses this relationship helps people understand what is happening.
+    > 为什么？一个组件的`displayName`可能会用于一些开发者工具或报错信息中，这么明确他们直接的以来关系有助于理解代码。
 
     ```jsx
     // bad
@@ -135,9 +135,10 @@
     }
     ```
 
-  - **Props Naming**: Avoid using DOM component prop names for different purposes.
+  - **属性命名**: 避免使用DOM元素的属性名。
 
     > Why? People expect props like `style` and `className` to mean one specific thing. Varying this API for a subset of your app makes the code less readable and less maintainable, and may cause bugs.
+  　> 为什么？大家希望属性像`style` 和 `className`来表示特定的事。改变这个API将会降低代码的可读性和维护性。并且容易产生bug。
 
     ```jsx
     // bad
@@ -147,7 +148,7 @@
     <MyComponent variant="fancy" />
     ```
 
-## Declaration
+## 声明
 
   - Do not use `displayName` for naming components. Instead, name the component by reference.
 
@@ -190,11 +191,11 @@
     </Foo>
     ```
 
-## Quotes
+## 引号
 
-  - Always use double quotes (`"`) for JSX attributes, but single quotes (`'`) for all other JS. eslint: [`jsx-quotes`](http://eslint.org/docs/rules/jsx-quotes)
+  - JSX属性使用双引号(`"`), JS使用单引号(`'`)。 eslint: [`jsx-quotes`](http://eslint.org/docs/rules/jsx-quotes)
 
-    > Why? Regular HTML attributes also typically use double quotes instead of single, so JSX attributes mirror this convention.
+    > 为什么？常规HTML属性通常使用双引号而不是单引号，因此JSX属性遵守这种约定。
 
     ```jsx
     // bad
@@ -210,9 +211,9 @@
     <Foo style={{ left: '20px' }} />
     ```
 
-## Spacing
+## 空格
 
-  - Always include a single space in your self-closing tag. eslint: [`no-multi-spaces`](http://eslint.org/docs/rules/no-multi-spaces), [`react/jsx-tag-spacing`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-tag-spacing.md)
+  - 自闭合标签前加入一个空格。 eslint: [`no-multi-spaces`](http://eslint.org/docs/rules/no-multi-spaces), [`react/jsx-tag-spacing`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-tag-spacing.md)
 
     ```jsx
     // bad
@@ -229,7 +230,7 @@
     <Foo />
     ```
 
-  - Do not pad JSX curly braces with spaces. eslint: [`react/jsx-curly-spacing`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-curly-spacing.md)
+  - 不要在JSX属性语法前后加入空格 eslint: [`react/jsx-curly-spacing`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-curly-spacing.md)
 
     ```jsx
     // bad
@@ -239,9 +240,9 @@
     <Foo bar={baz} />
     ```
 
-## Props
+## 属性
 
-  - Always use camelCase for prop names.
+  - 使用规范名字属性。
 
     ```jsx
     // bad
@@ -257,7 +258,7 @@
     />
     ```
 
-  - Omit the value of the prop when it is explicitly `true`. eslint: [`react/jsx-boolean-value`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)
+  - 省略为 `true` 的属性值。 eslint: [`react/jsx-boolean-value`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)
 
     ```jsx
     // bad
@@ -271,7 +272,7 @@
     />
     ```
 
-  - Always include an `alt` prop on `<img>` tags. If the image is presentational, `alt` can be an empty string or the `<img>` must have `role="presentation"`. eslint: [`jsx-a11y/alt-text`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/alt-text.md)
+  - `<img>`标签需要有`alt`。 If the image is presentational, `alt` can be an empty string or the `<img>` must have `role="presentation"`. eslint: [`jsx-a11y/alt-text`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/alt-text.md)
 
     ```jsx
     // bad
