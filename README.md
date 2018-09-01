@@ -104,7 +104,7 @@
 
   <a name="references--prefer-const"></a><a name="2.1"></a>
 
-  - [2.1](#references--prefer-const) 总是使用 `const` 声明引用; 避免 `var`。 eslint: [`prefer-const`](http://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign.html)
+  - [2.1](#references--prefer-const) 总是使用 `const` 声明引用; 避免 `var`。 eslint: [`prefer-const`](https://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](https://eslint.org/docs/rules/no-const-assign.html)
 
     > 为什么? 这将确保你不能重新分配你的引用，从而导致错误和难以理解的代码.
 
@@ -120,7 +120,7 @@
 
   <a name="references--disallow-var"></a><a name="2.2"></a>
 
-  - [2.2](#references--disallow-var) 如果必须重新赋值声明，请使用 `let ` 代替 ` var `。 eslint: [`no-var`](http://eslint.org/docs/rules/no-var.html) jscs: [`disallowVar`](http://jscs.info/rule/disallowVar)
+  - [2.2](#references--disallow-var) 如果必须重新赋值声明，请使用 `let ` 代替 ` var `。 eslint: [`no-var`](https://eslint.org/docs/rules/no-var.html) jscs: [`disallowVar`](http://jscs.info/rule/disallowVar)
 
     > 为什么? 因为 `let` 是块级作用域，而 `var` 是函数作用域。
 
