@@ -428,7 +428,7 @@
 
   <a name="arrays--callback-return"></a><a name="4.5"></a>
 
-  - [4.5](#arrays--callback-return) 数组方法始终显示声明返回。 如果你的函数体项[8.2](#arrows--implicit-return)一样简单，则可以省略。 eslint: [`array-callback-return`](http://eslint.org/docs/rules/array-callback-return)
+  - [4.7](#arrays--callback-return) 数组方法始终显示声明返回。 如果你的函数体项[8.2](#arrows--implicit-return)一样简单，则可以省略。 eslint: [`array-callback-return`](http://eslint.org/docs/rules/array-callback-return)
 
     ```javascript
     // 好的
@@ -476,7 +476,7 @@
 
   <a name="arrays--bracket-newline"></a>
 
-  - [4.6](#arrays--bracket-newline) 如果数组有多行，请在打开数组后和关闭数组括号之前使用换行符。
+  - [4.8](#arrays--bracket-newline) 如果数组有多行，请在打开数组后和关闭数组括号之前使用换行符。
 
   ```javascript
     // 糟糕的
@@ -510,7 +510,7 @@
       1,
       2,
     ];
-    ```
+  ```
 
 **[⬆ 回到目录](#table-of-contents)**
 
