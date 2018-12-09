@@ -8,10 +8,13 @@
 
 *更合理的书写 JavaScript*
 
+> **Note**: this guide assumes you are using [Babel](https://babeljs.io), and requires that you use [babel-preset-airbnb](https://npmjs.com/babel-preset-airbnb) or the equivalent. It also assumes you are installing shims/polyfills in your app, with [airbnb-browser-shims](https://npmjs.com/airbnb-browser-shims) or the equivalent.
+
 [![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb.svg)](https://www.npmjs.com/package/eslint-config-airbnb)
 [![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb-base.svg)](https://www.npmjs.com/package/eslint-config-airbnb-base)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/airbnb/javascript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+<<<<<<< HEAD
 其他风格指南
 
  - [ES5 (已废弃)](https://github.com/airbnb/javascript/tree/es5-deprecated/es5)
@@ -62,6 +65,61 @@
   1. [许可证](#license)
 
 ## 类型
+=======
+This guide is available in other languages too. See [Translation](#translation)
+
+Other Style Guides
+
+  - [ES5 (Deprecated)](https://github.com/airbnb/javascript/tree/es5-deprecated/es5)
+  - [React](react/)
+  - [CSS-in-JavaScript](css-in-javascript/)
+  - [CSS & Sass](https://github.com/airbnb/css)
+  - [Ruby](https://github.com/airbnb/ruby)
+
+## Table of Contents
+
+  1. [Types](#types)
+  1. [References](#references)
+  1. [Objects](#objects)
+  1. [Arrays](#arrays)
+  1. [Destructuring](#destructuring)
+  1. [Strings](#strings)
+  1. [Functions](#functions)
+  1. [Arrow Functions](#arrow-functions)
+  1. [Classes & Constructors](#classes--constructors)
+  1. [Modules](#modules)
+  1. [Iterators and Generators](#iterators-and-generators)
+  1. [Properties](#properties)
+  1. [Variables](#variables)
+  1. [Hoisting](#hoisting)
+  1. [Comparison Operators & Equality](#comparison-operators--equality)
+  1. [Blocks](#blocks)
+  1. [Control Statements](#control-statements)
+  1. [Comments](#comments)
+  1. [Whitespace](#whitespace)
+  1. [Commas](#commas)
+  1. [Semicolons](#semicolons)
+  1. [Type Casting & Coercion](#type-casting--coercion)
+  1. [Naming Conventions](#naming-conventions)
+  1. [Accessors](#accessors)
+  1. [Events](#events)
+  1. [jQuery](#jquery)
+  1. [ECMAScript 5 Compatibility](#ecmascript-5-compatibility)
+  1. [ECMAScript 6+ (ES 2015+) Styles](#ecmascript-6-es-2015-styles)
+  1. [Standard Library](#standard-library)
+  1. [Testing](#testing)
+  1. [Performance](#performance)
+  1. [Resources](#resources)
+  1. [In the Wild](#in-the-wild)
+  1. [Translation](#translation)
+  1. [The JavaScript Style Guide Guide](#the-javascript-style-guide-guide)
+  1. [Chat With Us About JavaScript](#chat-with-us-about-javascript)
+  1. [Contributors](#contributors)
+  1. [License](#license)
+  1. [Amendments](#amendments)
+
+## Types
+>>>>>>> 064e3bf8d578736c38a7d74419ea6ba10ee46d8f
 
   <a name="types--primitives"></a><a name="1.1"></a>
 
@@ -72,6 +130,7 @@
     - `boolean`
     - `null`
     - `undefined`
+    - `symbol`
 
     ```javascript
     const foo = 1;
@@ -81,6 +140,8 @@
 
     console.log(foo, bar); // => 1, 9
     ```
+
+    - Symbols cannot be faithfully polyfilled, so they should not be used when targeting browsers/environments that don’t support them natively.
 
   <a name="types--complex"></a><a name="1.2"></a>
   - [1.2](#types--complex)  **复杂类型**: 使用复杂类型时实际上是访问了一个引用。
@@ -308,7 +369,7 @@
     // 更好
     const has = Object.prototype.hasOwnProperty; // 在模块范围内缓存一次查找
     /* or */
-    import has from 'has';
+    import has from 'has'; // https://www.npmjs.com/package/has
     // ...
     console.log(has.call(object, key));
     ```
@@ -388,7 +449,36 @@
 
     ```javascript
     const foo = document.querySelectorAll('.foo');
+
+    // good
     const nodes = Array.from(foo);
+
+    // best
+    const nodes = [...foo];
+    ```
+
+  <a name="arrays--from-array-like"></a>
+  - [4.5](#arrays--from-array-like) Use [`Array.from`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/from) for converting an array-like object to an array.
+
+    ```javascript
+    const arrLike = { 0: 'foo', 1: 'bar', 2: 'baz', length: 3 };
+
+    // bad
+    const arr = Array.prototype.slice.call(arrLike);
+
+    // good
+    const arr = Array.from(arrLike);
+    ```
+
+  <a name="arrays--mapping"></a>
+  - [4.6](#arrays--mapping) Use [`Array.from`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/from) instead of spread `...` for mapping over iterables, because it avoids creating an intermediate array.
+
+    ```javascript
+    // bad
+    const baz = [...foo].map(bar);
+
+    // good
+    const baz = Array.from(foo, bar);
     ```
 
   <a name="arrays--callback-return"></a><a name="4.5"></a>
@@ -405,18 +495,16 @@
     // 好的
     [1, 2, 3].map(x => x + 1);
 
-    // 糟糕的
-    const flat = {};
-    [[0, 1], [2, 3], [4, 5]].reduce((memo, item, index) => {
-      const flatten = memo.concat(item);
-      flat[index] = flatten;
+    // bad - no returned value means `acc` becomes undefined after the first iteration
+    [[0, 1], [2, 3], [4, 5]].reduce((acc, item, index) => {
+      const flatten = acc.concat(item);
+      acc[index] = flatten;
     });
 
-    // 好的
-    const flat = {};
-    [[0, 1], [2, 3], [4, 5]].reduce((memo, item, index) => {
-      const flatten = memo.concat(item);
-      flat[index] = flatten;
+    // good
+    [[0, 1], [2, 3], [4, 5]].reduce((acc, item, index) => {
+      const flatten = acc.concat(item);
+      acc[index] = flatten;
       return flatten;
     });
 
@@ -446,38 +534,38 @@
   - [4.6](#arrays--bracket-newline) 如果数组有多行，请在打开数组后和关闭数组括号之前使用换行符。
 
   ```javascript
-  // 糟糕的
-  const arr = [
-    [0, 1], [2, 3], [4, 5],
-  ];
+    // 糟糕的
+    const arr = [
+      [0, 1], [2, 3], [4, 5],
+    ];
 
-  const objectInArray = [{
-    id: 1,
-  }, {
-    id: 2,
-  }];
-
-  const numberInArray = [
-    1, 2,
-  ];
-
-  // 好
-  const arr = [[0, 1], [2, 3], [4, 5]];
-
-  const objectInArray = [
-    {
+    const objectInArray = [{
       id: 1,
-    },
-    {
+    }, {
       id: 2,
-    },
-  ];
+    }];
 
-  const numberInArray = [
-    1,
-    2,
-  ];
-  ```
+    const numberInArray = [
+      1, 2,
+    ];
+
+    // 好
+    const arr = [[0, 1], [2, 3], [4, 5]];
+
+    const objectInArray = [
+      {
+        id: 1,
+      },
+      {
+        id: 2,
+      },
+    ];
+
+    const numberInArray = [
+      1,
+      2,
+    ];
+    ```
 
 **[⬆ 回到目录](#table-of-contents)**
 
@@ -1079,7 +1167,7 @@
     // 好的
     const itemHeight = (item) => {
       const { height, largeSize, smallSize } = item;
-      return height > 256 ? largeSize : smallSize;
+      return height <= 256 ? largeSize : smallSize;
     };
     ```
 
@@ -1349,6 +1437,7 @@
 
   - [10.6](#modules--prefer-default-export) 在单出口的模块中，默认出口多于指定的出口。
  eslint: [`import/prefer-default-export`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/prefer-default-export.md)
+    > Why? To encourage more files that only ever export one thing, which is better for readability and maintainability.
 
     ```javascript
     // 不太好
@@ -1456,7 +1545,7 @@
     const increasedByOne = [];
     numbers.forEach((num) => {
       increasedByOne.push(num + 1);
-    );
+    });
 
     // 更好 (保持它的功能)
     const increasedByOne = numbers.map(num => num + 1);
@@ -1566,6 +1655,16 @@
 
     const isJedi = getProp('jedi');
     ```
+  <a name="es2016-properties--exponentiation-operator"></a>
+  - [12.3](#es2016-properties--exponentiation-operator) Use exponentiation operator `**` when calculating exponentiations. eslint: [`no-restricted-properties`](https://eslint.org/docs/rules/no-restricted-properties).
+
+    ```javascript
+    // bad
+    const binary = Math.pow(2, 10);
+
+    // good
+    const binary = 2 ** 10;
+    ```
 
 **[⬆ 回到目录](#table-of-contents)**
 
@@ -1674,7 +1773,7 @@
     ```
   <a name="variables--no-chain-assignment"></a><a name="13.5"></a>
 
-  - [13.5](#variables--no-chain-assignment) 不要链式定义变量
+  - [13.5](#variables--no-chain-assignment) 不要链式定义变量。 eslint: [`no-multi-assign`](https://eslint.org/docs/rules/no-multi-assign)
 
     > 为什么? 链式定义变量会隐性创造全局变量。
 
@@ -1740,7 +1839,70 @@
     const truthyCount = array.filter(Boolean).length;
     ```
 
-**[⬆ 回到目录](#table-of-contents)**
+<a name="variables--linebreak"></a>
+  - [13.7](#variables--linebreak) Avoid linebreaks before or after `=` in an assignment. If your assignment violates [`max-len`](https://eslint.org/docs/rules/max-len.html), surround the value in parens. eslint [`operator-linebreak`](https://eslint.org/docs/rules/operator-linebreak.html).
+
+    > Why? Linebreaks surrounding `=` can obfuscate the value of an assignment.
+
+    ```javascript
+    // bad
+    const foo =
+      superLongLongLongLongLongLongLongLongFunctionName();
+
+    // bad
+    const foo
+      = 'superLongLongLongLongLongLongLongLongString';
+
+    // good
+    const foo = (
+      superLongLongLongLongLongLongLongLongFunctionName()
+    );
+
+    // good
+    const foo = 'superLongLongLongLongLongLongLongLongString';
+    ```
+
+<a name="variables--no-unused-vars"></a>
+  - [13.8](#variables--no-unused-vars) Disallow unused variables. eslint: [`no-unused-vars`](https://eslint.org/docs/rules/no-unused-vars)
+
+    > Why? Variables that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring. Such variables take up space in the code and can lead to confusion by readers.
+
+    ```javascript
+    // bad
+
+    var some_unused_var = 42;
+
+    // Write-only variables are not considered as used.
+    var y = 10;
+    y = 5;
+
+    // A read for a modification of itself is not considered as used.
+    var z = 0;
+    z = z + 1;
+
+    // Unused function arguments.
+    function getX(x, y) {
+        return x;
+    }
+
+    // good
+
+    function getXPlusY(x, y) {
+      return x + y;
+    }
+
+    var x = 1;
+    var y = a + 2;
+
+    alert(getXPlusY(x, y));
+
+    // 'type' is ignored even if unused because it has a rest property sibling.
+    // This is a form of extracting an object that omits the specified keys.
+    var { type, ...coords } = data;
+    // 'coords' is now the 'data' object without its 'type' property.
+    ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## 变量提升
 
@@ -1911,8 +2073,6 @@
 
     > 为什么? 在整个 `switch` 块中词法声明是可见的，但是只在匹配 `case` 初始化后才赋值。 当多个 `case` 定义相同的声明，就会出现问题。
 
-    eslint rules: [`no-case-declarations`](http://eslint.org/docs/rules/no-case-declarations.html).
-
     ```javascript
     // 不好
     switch (foo) {
@@ -1970,6 +2130,7 @@
     // 稍微好点
     const maybeNull = value1 > value2 ? 'baz' : null;
 
+    // better
     const foo = maybe1 > maybe2
       ? 'bar'
       : maybeNull;
@@ -1998,13 +2159,46 @@
     const baz = !c;
     ```
 
-**[⬆ 回到目录](#table-of-contents)**
+  <a name="comparison--no-mixed-operators"></a>
+  - [15.8](#comparison--no-mixed-operators) When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators (`+`, `-`, `*`, & `/`) since their precedence is broadly understood. eslint: [`no-mixed-operators`](https://eslint.org/docs/rules/no-mixed-operators.html)
+
+    > Why? This improves readability and clarifies the developer’s intention.
+
+    ```javascript
+    // bad
+    const foo = a && b < 0 || c > 0 || d + 1 === 0;
+
+    // bad
+    const bar = a ** b - 5 % d;
+
+    // bad
+    // one may be confused into thinking (a || b) && c
+    if (a || b && c) {
+      return d;
+    }
+
+    // good
+    const foo = (a && b < 0) || c > 0 || (d + 1 === 0);
+
+    // good
+    const bar = (a ** b) - (5 % d);
+
+    // good
+    if (a || (b && c)) {
+      return d;
+    }
+
+    // good
+    const bar = a + b / c * d;
+    ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## 代码块
 
   <a name="blocks--braces"></a><a name="16.1"></a>
 
-  - [16.1](#blocks--braces) 在所有的多行代码块使用括号。
+  - [16.1](#blocks--braces) 在所有的多行代码块使用括号。eslint: [`nonblock-statement-body-position`](https://eslint.org/docs/rules/nonblock-statement-body-position)
 
     ```javascript
     // 不好
@@ -2030,7 +2224,7 @@
 
   <a name="blocks--cuddled-elses"></a><a name="16.2"></a>
 
-  - [16.2](#blocks--cuddled-elses) 如果你用到多行代码块 `if` 和 `esle` ，请将`else`放在 `if` 闭合括号的同一行。 eslint: [`brace-style`](http://eslint.org/docs/rules/brace-style.html) jscs:  [`disallowNewlineBeforeBlockStatements`](http://jscs.info/rule/disallowNewlineBeforeBlockStatements)
+  - [16.2](#blocks--cuddled-elses) 如果你用到多行代码块 `if` 和 `esle` ，请将`else`放在 `if` 闭合括号的同一行。 eslint: [`brace-style`](http://eslint.org/docs/rules/brace-style.html)
 
     ```javascript
     // 坏
@@ -2051,13 +2245,79 @@
     }
     ```
 
-**[⬆ 回到目录](#table-of-contents)**
+  <a name="blocks--no-else-return"></a><a name="16.3"></a>
+  - [16.3](#blocks--no-else-return) If an `if` block always executes a `return` statement, the subsequent `else` block is unnecessary. A `return` in an `else if` block following an `if` block that contains a `return` can be separated into multiple `if` blocks. eslint: [`no-else-return`](https://eslint.org/docs/rules/no-else-return)
+
+    ```javascript
+    // bad
+    function foo() {
+      if (x) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+
+    // bad
+    function cats() {
+      if (x) {
+        return x;
+      } else if (y) {
+        return y;
+      }
+    }
+
+    // bad
+    function dogs() {
+      if (x) {
+        return x;
+      } else {
+        if (y) {
+          return y;
+        }
+      }
+    }
+
+    // good
+    function foo() {
+      if (x) {
+        return x;
+      }
+
+      return y;
+    }
+
+    // good
+    function cats() {
+      if (x) {
+        return x;
+      }
+
+      if (y) {
+        return y;
+      }
+    }
+
+    // good
+    function dogs(x) {
+      if (x) {
+        if (z) {
+          return y;
+        }
+      } else {
+        return z;
+      }
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## 控制语句
 
   <a name="control-statements"></a>
-
   - [17.1](#control-statements) 如果你的控制语句（`if`，`while`等。）太长或者超过单行最大长度，每个分组条件都应该单独一行。逻辑运算符是否应该开始或结束行取决于你。
+
+    > Why? Requiring operators at the beginning of the line keeps the operators aligned and follows a pattern similar to method chaining. This also improves readability by making it easier to visually follow complex logic.
 
     ```javascript
     // 不好
@@ -2077,21 +2337,7 @@
       thing1();
     }
 
-    // 好
-    if (
-      (foo === 123 || bar === "abc") &&
-      doesItLookGoodWhenItBecomesThatLong() &&
-      isThisReallyHappening()
-    ) {
-      thing1();
-    }
-
-    // 好
-    if (foo === 123 && bar === 'abc') {
-      thing1();
-    }
-
-    // 好
+    // bad
     if (
       foo === 123 &&
       bar === 'abc'
@@ -2099,16 +2345,43 @@
       thing1();
     }
 
-    // 好
+    // good
     if (
       foo === 123
       && bar === 'abc'
     ) {
       thing1();
     }
+
+    // 好
+    if (
+      (foo === 123 || bar === 'abc')
+      && doesItLookGoodWhenItBecomesThatLong()
+      && isThisReallyHappening()
+    ) {
+      thing1();
+    }
+
+    // good
+    if (foo === 123 && bar === 'abc') {
+      thing1();
+    }
     ```
 
-**[⬆ 回到目录](#table-of-contents)**
+  <a name="control-statement--value-selection"></a><a name="control-statements--value-selection"></a>
+  - [17.2](#control-statements--value-selection) Don't use selection operators in place of control statements.
+
+    ```javascript
+    // bad
+    !isRunning && startRunning();
+
+    // good
+    if (!isRunning) {
+      startRunning();
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## 注释
 
@@ -2259,7 +2532,7 @@
 
   <a name="whitespace--spaces"></a><a name="18.1"></a>
 
-  - [19.1](#whitespace--spaces) 使用2个空格的soft tabs (空格字符)。 eslint: [`indent`](http://eslint.org/docs/rules/indent.html) jscs: [`validateIndentation`](http://jscs.info/rule/validateIndentation)
+  - [19.1](#whitespace--spaces) 使用2个空格的soft tabs (空格字符)。 eslint: [`indent`](http://eslint.org/docs/rules/indent.html)
 
     ```javascript
     // 不好的
@@ -2280,7 +2553,7 @@
 
   <a name="whitespace--before-blocks"></a><a name="18.2"></a>
 
-  - [19.2](#whitespace--before-blocks) 在开始括号的前面添加一个空格。 eslint: [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks.html) jscs: [`requireSpaceBeforeBlockStatements`](http://jscs.info/rule/requireSpaceBeforeBlockStatements)
+  - [19.2](#whitespace--before-blocks) 在开始括号的前面添加一个空格。 eslint: [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks.html)
 
     ```javascript
     // 不好的
@@ -2308,7 +2581,7 @@
 
   <a name="whitespace--around-keywords"></a><a name="18.3"></a>
 
-  - [19.3](#whitespace--around-keywords) 在控制语句的前括号中放置1个空格 (`if`, `while`等。)。在函数调用和声明之间没有参数列表和函数名之间的空格。 eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing.html) jscs: [`requireSpaceAfterKeywords`](http://jscs.info/rule/requireSpaceAfterKeywords)
+  - [19.3](#whitespace--around-keywords) 在控制语句的前括号中放置1个空格 (`if`, `while`等。)。在函数调用和声明之间没有参数列表和函数名之间的空格。 eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing.html)
 
     ```javascript
     // 不好
@@ -2334,7 +2607,7 @@
 
   <a name="whitespace--infix-ops"></a><a name="18.4"></a>
 
-  - [19.4](#whitespace--infix-ops) 运算符添加空格。 eslint: [`space-infix-ops`](http://eslint.org/docs/rules/space-infix-ops.html) jscs: [`requireSpaceBeforeBinaryOperators`](http://jscs.info/rule/requireSpaceBeforeBinaryOperators), [`requireSpaceAfterBinaryOperators`](http://jscs.info/rule/requireSpaceAfterBinaryOperators)
+  - [19.4](#whitespace--infix-ops) 运算符添加空格。 eslint: [`space-infix-ops`](http://eslint.org/docs/rules/space-infix-ops.html)
 
     ```javascript
     // 不好
@@ -2416,7 +2689,7 @@
 
   <a name="whitespace--after-blocks"></a><a name="18.7"></a>
 
-  - [19.7](#whitespace--after-blocks) 在空白块和下一个语句之前留下空白行。 jscs: [`requirePaddingNewLinesAfterBlocks`](http://jscs.info/rule/requirePaddingNewLinesAfterBlocks)
+  - [19.7](#whitespace--after-blocks) 在空白块和下一个语句之前留下空白行。
 
     ```javascript
     // 不好
@@ -2475,7 +2748,7 @@
 
   <a name="whitespace--padded-blocks"></a><a name="18.8"></a>
 
-  - [19.8](#whitespace--padded-blocks) 不要在代码块头部添加空白行。 eslint: [`padded-blocks`](http://eslint.org/docs/rules/padded-blocks.html) jscs:  [`disallowPaddingNewlinesInBlocks`](http://jscs.info/rule/disallowPaddingNewlinesInBlocks)
+  - [19.8](#whitespace--padded-blocks) 不要在代码块头部添加空白行。 eslint: [`padded-blocks`](http://eslint.org/docs/rules/padded-blocks.html)
 
     ```javascript
     // 不好
@@ -2494,7 +2767,15 @@
 
     }
 
-    // 好的
+    // bad
+    class Foo {
+
+      constructor(bar) {
+        this.bar = bar;
+      }
+    }
+
+    // good
     function bar() {
       console.log(foo);
     }
@@ -2509,7 +2790,7 @@
 
   <a name="whitespace--in-parens"></a><a name="18.9"></a>
 
-  - [19.9](#whitespace--in-parens) 在圆括号内边添加空格。 eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens.html) jscs: [`disallowSpacesInsideParentheses`](http://jscs.info/rule/disallowSpacesInsideParentheses)
+  - [19.9](#whitespace--in-parens) 在圆括号内边添加空格。 eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens.html)
 
     ```javascript
     // 坏
@@ -2535,7 +2816,7 @@
 
   <a name="whitespace--in-brackets"></a><a name="18.10"></a>
 
-  - [19.10](#whitespace--in-brackets) 在括号内边添加空格。 eslint: [`array-bracket-spacing`](http://eslint.org/docs/rules/array-bracket-spacing.html) jscs: [`disallowSpacesInsideArrayBrackets`](http://jscs.info/rule/disallowSpacesInsideArrayBrackets)
+  - [19.10](#whitespace--in-brackets) 在括号内边添加空格。 eslint: [`array-bracket-spacing`](http://eslint.org/docs/rules/array-bracket-spacing.html)
 
     ```javascript
     // 坏
@@ -2549,7 +2830,7 @@
 
   <a name="whitespace--in-braces"></a><a name="18.11"></a>
 
-  - [19.11](#whitespace--in-braces) 大括号内边添加空格。eslint: [`object-curly-spacing`](http://eslint.org/docs/rules/object-curly-spacing.html) jscs: [`requireSpacesInsideObjectBrackets`](http://jscs.info/rule/requireSpacesInsideObjectBrackets)
+  - [19.11](#whitespace--in-braces) 大括号内边添加空格。eslint: [`object-curly-spacing`](http://eslint.org/docs/rules/object-curly-spacing.html)
 
     ```javascript
     // 坏
@@ -2561,7 +2842,7 @@
 
   <a name="whitespace--max-len"></a><a name="18.12"></a>
 
-  - [19.12](#whitespace--max-len) 避免一行过长超过100个字符（包括空格）。 注意: 长字符串免除当前规则，不能打破字符串的[规则](#strings--line-length) eslint: [`max-len`](http://eslint.org/docs/rules/max-len.html) jscs: [`maximumLineLength`](http://jscs.info/rule/maximumLineLength)
+  - [19.12](#whitespace--max-len) 避免一行过长超过100个字符（包括空格）。 注意: 长字符串免除当前规则，不能打破字符串的[规则](#strings--line-length) eslint: [`max-len`](http://eslint.org/docs/rules/max-len.html)
 
     > 为什么? 保证可读性和可维护性。
 
@@ -2590,13 +2871,104 @@
       .fail(() => console.log('You have failed this city.'));
     ```
 
-**[⬆ 回到目录](#table-of-contents)**
+  <a name="whitespace--block-spacing"></a>
+  - [19.13](#whitespace--block-spacing) Require consistent spacing inside an open block token and the next token on the same line. This rule also enforces consistent spacing inside a close block token and previous token on the same line. eslint: [`block-spacing`](https://eslint.org/docs/rules/block-spacing)
+
+    ```javascript
+    // bad
+    function foo() {return true;}
+    if (foo) { bar = 0;}
+
+    // good
+    function foo() { return true; }
+    if (foo) { bar = 0; }
+    ```
+
+  <a name="whitespace--comma-spacing"></a>
+  - [19.14](#whitespace--comma-spacing) Avoid spaces before commas and require a space after commas. eslint: [`comma-spacing`](https://eslint.org/docs/rules/comma-spacing)
+
+    ```javascript
+    // bad
+    var foo = 1,bar = 2;
+    var arr = [1 , 2];
+
+    // good
+    var foo = 1, bar = 2;
+    var arr = [1, 2];
+    ```
+
+  <a name="whitespace--computed-property-spacing"></a>
+  - [19.15](#whitespace--computed-property-spacing) Enforce spacing inside of computed property brackets. eslint: [`computed-property-spacing`](https://eslint.org/docs/rules/computed-property-spacing)
+
+    ```javascript
+    // bad
+    obj[foo ]
+    obj[ 'foo']
+    var x = {[ b ]: a}
+    obj[foo[ bar ]]
+
+    // good
+    obj[foo]
+    obj['foo']
+    var x = { [b]: a }
+    obj[foo[bar]]
+    ```
+
+  <a name="whitespace--func-call-spacing"></a>
+  - [19.16](#whitespace--func-call-spacing) Avoid spaces between functions and their invocations. eslint: [`func-call-spacing`](https://eslint.org/docs/rules/func-call-spacing)
+
+    ```javascript
+    // bad
+    func ();
+
+    func
+    ();
+
+    // good
+    func();
+    ```
+
+  <a name="whitespace--key-spacing"></a>
+  - [19.17](#whitespace--key-spacing) Enforce spacing between keys and values in object literal properties. eslint: [`key-spacing`](https://eslint.org/docs/rules/key-spacing)
+
+    ```javascript
+    // bad
+    var obj = { "foo" : 42 };
+    var obj2 = { "foo":42 };
+
+    // good
+    var obj = { "foo": 42 };
+    ```
+
+  <a name="whitespace--no-trailing-spaces"></a>
+  - [19.18](#whitespace--no-trailing-spaces) Avoid trailing spaces at the end of lines. eslint: [`no-trailing-spaces`](https://eslint.org/docs/rules/no-trailing-spaces)
+
+  <a name="whitespace--no-multiple-empty-lines"></a>
+  - [19.19](#whitespace--no-multiple-empty-lines) Avoid multiple empty lines and only allow one newline at the end of files. eslint: [`no-multiple-empty-lines`](https://eslint.org/docs/rules/no-multiple-empty-lines)
+
+    <!-- markdownlint-disable MD012 -->
+    ```javascript
+    // bad
+    var x = 1;
+
+
+
+    var y = 2;
+
+    // good
+    var x = 1;
+
+    var y = 2;
+    ```
+    <!-- markdownlint-enable MD012 -->
+
+**[⬆ back to top](#table-of-contents)**
 
 ## 逗号
 
 <a name="commas--leading-trailing"></a><a name="19.1"></a>
 
-  - [20.1](#commas--leading-trailing) 逗号前置？ **不。** eslint: [`comma-style`](http://eslint.org/docs/rules/comma-style.html) jscs: [`requireCommaBeforeLineBreak`](http://jscs.info/rule/requireCommaBeforeLineBreak)
+  - [20.1](#commas--leading-trailing) 逗号前置？ **不。** eslint: [`comma-style`](http://eslint.org/docs/rules/comma-style.html)
 
     ```javascript
     // 不好
@@ -2632,7 +3004,7 @@
 
   <a name="commas--dangling"></a><a name="19.2"></a>
 
-  - [20.2](#commas--dangling) 最后也添加都好？ **是的。** eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle.html) jscs: [`requireTrailingComma`](http://jscs.info/rule/requireTrailingComma)
+  - [20.2](#commas--dangling) 最后也添加都好？ **是的。** eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle.html)
 
     > 为什么? git的diff记录更清爽。 同时，你不必担心后面的[逗号的问题](https://github.com/airbnb/javascript/blob/es5-deprecated/es5/README.md#commas)在传统的浏览器，因为类似Babel这样的转译器将会在转译的同时删除多余的逗号。
 
@@ -2732,30 +3104,50 @@
 ## 分号
 
   <a name="semicolons--required"></a><a name="20.1"></a>
+  - [21.1](#semicolons--required) **需要。** eslint: [`semi`](http://eslint.org/docs/rules/semi.html)
 
-  - [21.1](#semicolons--required) **需要。** eslint: [`semi`](http://eslint.org/docs/rules/semi.html) jscs: [`requireSemicolons`](http://jscs.info/rule/requireSemicolons)
+    > Why? When JavaScript encounters a line break without a semicolon, it uses a set of rules called [Automatic Semicolon Insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion) to determine whether or not it should regard that line break as the end of a statement, and (as the name implies) place a semicolon into your code before the line break if it thinks so. ASI contains a few eccentric behaviors, though, and your code will break if JavaScript misinterprets your line break. These rules will become more complicated as new features become a part of JavaScript. Explicitly terminating your statements and configuring your linter to catch missing semicolons will help prevent you from encountering issues.
 
     ```javascript
-    // 不好
-    (function () {
-      const name = 'Skywalker'
-      return name
-    })()
+    // bad - raises exception
+    const luke = {}
+    const leia = {}
+    [luke, leia].forEach(jedi => jedi.father = 'vader')
 
-    // 好
-    (function () {
-      const name = 'Skywalker';
-      return name;
+    // bad - raises exception
+    const reaction = "No! That’s impossible!"
+    (async function meanwhileOnTheFalcon() {
+      // handle `leia`, `lando`, `chewie`, `r2`, `c3p0`
+      // ...
+    }())
+
+    // bad - returns `undefined` instead of the value on the next line - always happens when `return` is on a line by itself because of ASI!
+    function foo() {
+      return
+        'search your feelings, you know it to be foo'
+    }
+
+    // good
+    const luke = {};
+    const leia = {};
+    [luke, leia].forEach((jedi) => {
+      jedi.father = 'vader';
+    });
+
+    // good
+    const reaction = "No! That’s impossible!";
+    (async function meanwhileOnTheFalcon() {
+      // handle `leia`, `lando`, `chewie`, `r2`, `c3p0`
+      // ...
     }());
 
-    // 好, but legacy (防止两个立即调用的函数表达式合并时被当成参数)
-    ;((() => {
-      const name = 'Skywalker';
-      return name;
-    })());
+    // good
+    function foo() {
+      return 'search your feelings, you know it to be foo';
+    }
     ```
 
-    [查看更多](https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function/7365214%237365214).
+    [查看更多](https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function/7365214#7365214).
 
 **[⬆ 回到目录](#table-of-contents)**
 
@@ -2767,13 +3159,16 @@
 
   <a name="coercion--strings"></a><a name="21.2"></a>
 
-  - [22.2](#coercion--strings)  字符类型:
+  - [22.2](#coercion--strings)  字符类型: eslint: [`no-new-wrappers`](https://eslint.org/docs/rules/no-new-wrappers)
 
     ```javascript
     // => this.reviewScore = 9;
 
-    // 不好
-    const totalScore = this.reviewScore + ''; // 调用 this.reviewScore.valueOf()
+    // bad
+    const totalScore = new String(this.reviewScore); // typeof totalScore is "object" not "string"
+
+    // bad
+    const totalScore = this.reviewScore + ''; // invokes this.reviewScore.valueOf()
 
     // 不好
     const totalScore = this.reviewScore.toString(); // 不一定返回字符串
@@ -2784,7 +3179,7 @@
 
   <a name="coercion--numbers"></a><a name="21.3"></a>
 
-  - [22.3](#coercion--numbers) 数字类型: 使用 `Number` 和 总是带上转换基数的 `parseInt`。eslint: [`radix`](http://eslint.org/docs/rules/radix)
+  - [22.3](#coercion--numbers) 数字类型: 使用 `Number` 和 总是带上转换基数的 `parseInt`。eslint: [`radix`](http://eslint.org/docs/rules/radix) [`no-new-wrappers`](https://eslint.org/docs/rules/no-new-wrappers)
 
     ```javascript
     const inputValue = '4';
@@ -2834,7 +3229,7 @@
 
   <a name="coercion--booleans"></a><a name="21.6"></a>
 
-  - [22.6](#coercion--booleans) 布尔类型:
+  - [22.6](#coercion--booleans) 布尔类型:eslint: [`no-new-wrappers`](https://eslint.org/docs/rules/no-new-wrappers)
 
     ```javascript
     const age = 0;
@@ -2871,7 +3266,7 @@
 
   <a name="naming--camelCase"></a><a name="22.2"></a>
 
-  - [23.2](#naming--camelCase) 使用驼峰命名法命名对象、函数、实例。 eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase.html) jscs: [`requireCamelCaseOrUpperCaseIdentifiers`](http://jscs.info/rule/requireCamelCaseOrUpperCaseIdentifiers)
+  - [23.2](#naming--camelCase) 使用驼峰命名法命名对象、函数、实例。 eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase.html)
 
     ```javascript
     // 不好
@@ -2886,7 +3281,7 @@
 
   <a name="naming--PascalCase"></a><a name="22.3"></a>
 
-  - [23.3](#naming--PascalCase) 命名构造函数或类只使用帕斯卡拼写法。 eslint: [`new-cap`](http://eslint.org/docs/rules/new-cap.html) jscs: [`requireCapitalizedConstructors`](http://jscs.info/rule/requireCapitalizedConstructors)
+  - [23.3](#naming--PascalCase) 命名构造函数或类只使用帕斯卡拼写法。 eslint: [`new-cap`](http://eslint.org/docs/rules/new-cap.html)
 
     ```javascript
     // 坏
@@ -2912,7 +3307,7 @@
 
   <a name="naming--leading-underscore"></a><a name="22.4"></a>
 
-  - [23.4](#naming--leading-underscore) 前后不适用下划线。 eslint: [`no-underscore-dangle`](http://eslint.org/docs/rules/no-underscore-dangle.html) jscs: [`disallowDanglingUnderscores`](http://jscs.info/rule/disallowDanglingUnderscores)
+  - [23.4](#naming--leading-underscore) 前后不适用下划线。 eslint: [`no-underscore-dangle`](http://eslint.org/docs/rules/no-underscore-dangle.html)
 
     > 为什么? 因为JavaScript中对于属性或方法没有私有的概念，尽管大家约定下划线表示“私有”，但实际上，JS中这些属性完全是对外公开的。依照这种传统的惯例，会误导开发者认为对这些做改变并不会破坏对外API的约定，或者不需要对改变进行测试。简单来说： 如果想进行私有化，必须要保证外部不可访问。
 
@@ -2924,11 +3319,16 @@
 
     // 好
     this.firstName = 'Panda';
+
+    // good, in environments where WeakMaps are available
+    // see https://kangax.github.io/compat-table/es6/#test-WeakMap
+    const firstNames = new WeakMap();
+    firstNames.set(this, 'Panda');
     ```
 
   <a name="naming--self-this"></a><a name="22.5"></a>
 
-  - [23.5](#naming--self-this) 不用缓存 `this`。使用箭头函数或[Function#bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)。 jscs: [`disallowNodeTypes`](http://jscs.info/rule/disallowNodeTypes)
+  - [23.5](#naming--self-this) 不用缓存 `this`。使用箭头函数或[Function#bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)。
 
     ```javascript
     // 坏
@@ -3040,16 +3440,59 @@
       // ...
     ];
 
-    // 更好
+    // also good
+    const httpRequests = [
+      // ...
+    ];
+
+    // best
     import TextMessageContainer from './containers/TextMessageContainer';
 
-    // 更好
-    const Requests = [
+    // best
+    const requests = [
       // ...
     ];
     ```
 
-**[⬆ 返回顶部](#table-of-contents)**
+  <a name="naming--uppercase"></a>
+  - [23.10](#naming--uppercase) You may optionally uppercase a constant only if it (1) is exported, (2) is a `const` (it can not be reassigned), and (3) the programmer can trust it (and its nested properties) to never change.
+
+    > Why? This is an additional tool to assist in situations where the programmer would be unsure if a variable might ever change. UPPERCASE_VARIABLES are letting the programmer know that they can trust the variable (and its properties) not to change.
+    - What about all `const` variables? - This is unnecessary, so uppercasing should not be used for constants within a file. It should be used for exported constants however.
+    - What about exported objects? - Uppercase at the top level of export  (e.g. `EXPORTED_OBJECT.key`) and maintain that all nested properties do not change.
+
+    ```javascript
+    // bad
+    const PRIVATE_VARIABLE = 'should not be unnecessarily uppercased within a file';
+
+    // bad
+    export const THING_TO_BE_CHANGED = 'should obviously not be uppercased';
+
+    // bad
+    export let REASSIGNABLE_VARIABLE = 'do not use let with uppercase variables';
+
+    // ---
+
+    // allowed but does not supply semantic value
+    export const apiKey = 'SOMEKEY';
+
+    // better in most cases
+    export const API_KEY = 'SOMEKEY';
+
+    // ---
+
+    // bad - unnecessarily uppercases key while adding no semantic value
+    export const MAPPING = {
+      KEY: 'value'
+    };
+
+    // good
+    export const MAPPING = {
+      key: 'value'
+    };
+    ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## 访问器
 
@@ -3103,7 +3546,7 @@
 
   <a name="accessors--consistent"></a><a name="23.4"></a>
 
-  - [24.4](#accessors--consistent) 创建 get() 和 set() 函数是可以的，但要保持一致。
+  - [24.4](#accessors--consistent) 创建 `get()` 和 `set()` 函数是可以的，但要保持一致。
 
     ```javascript
     class Jedi {
@@ -3136,8 +3579,8 @@
 
     // ...
 
-    $(this).on('listingUpdated', (e, listingId) => {
-      // do something with listingId
+    $(this).on('listingUpdated', (e, listingID) => {
+      // do something with listingID
     });
     ```
 
@@ -3150,7 +3593,7 @@
     // ...
 
     $(this).on('listingUpdated', (e, data) => {
-      // do something with data.listingId
+      // do something with data.listingID
     });
     ```
 
@@ -3160,7 +3603,7 @@
 
   <a name="jquery--dollar-prefix"></a><a name="25.1"></a>
 
-  - [26.1](#jquery--dollar-prefix) jQuery对象赋值的变量 `$` 开头。 jscs: [`requireDollarBeforejQueryAssignment`](http://jscs.info/rule/requireDollarBeforejQueryAssignment)
+  - [26.1](#jquery--dollar-prefix) jQuery对象赋值的变量 `$` 开头。
 
     ```javascript
     // 坏
@@ -3245,18 +3688,19 @@
   - [28.1](#es6-styles) 这是一个收集的各种ES6特性的链接。
 
 1. [Arrow Functions](#arrow-functions)
-1. [Classes](#classes--constructors)
-1. [Object Shorthand](#es6-object-shorthand)
-1. [Object Concise](#es6-object-concise)
-1. [Object Computed Properties](#es6-computed-properties)
-1. [Template Strings](#es6-template-literals)
-1. [Destructuring](#destructuring)
-1. [Default Parameters](#es6-default-parameters)
-1. [Rest](#es6-rest)
-1. [Array Spreads](#es6-array-spreads)
-1. [Let and Const](#references)
-1. [Iterators and Generators](#iterators-and-generators)
-1. [Modules](#modules)
+2. [Classes](#classes--constructors)
+3. [Object Shorthand](#es6-object-shorthand)
+4. [Object Concise](#es6-object-concise)
+5. [Object Computed Properties](#es6-computed-properties)
+6. [Template Strings](#es6-template-literals)
+7. [Destructuring](#destructuring)
+8. [Default Parameters](#es6-default-parameters)
+9. [Rest](#es6-rest)
+10. [Array Spreads](#es6-array-spreads)
+11. [Let and Const](#references)
+12. [Exponentiation Operator](#es2016-properties--exponentiation-operator)
+13. [Iterators and Generators](#iterators-and-generators)
+14. [Modules](#modules)
 
   <a name="tc39-proposals"></a>
 
@@ -3264,13 +3708,50 @@
 
     > 为什么? [他们还没有最终采用](https://tc39.github.io/process-document/)，他们还没有被最终采用，很可能发生改变，甚至整个被取消掉。我们要使用JavaScript语言，而不是那些提议，那些提议还没有变成语言的一部分。
 
-**[⬆ 回到目录](#table-of-contents)**
+## Standard Library
 
-## 测试
+  The [Standard Library](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects)
+  contains utilities that are functionally broken but remain for legacy reasons.
 
-  <a name="testing--yup"></a><a name="28.1"></a>
+  <a name="standard-library--isnan"></a>
+  - [29.1](#standard-library--isnan) Use `Number.isNaN` instead of global `isNaN`.
+    eslint: [`no-restricted-globals`](https://eslint.org/docs/rules/no-restricted-globals)
 
-  - [29.1](#testing--yup) **需要**
+    > Why? The global `isNaN` coerces non-numbers to numbers, returning true for anything that coerces to NaN.
+    > If this behavior is desired, make it explicit.
+
+    ```javascript
+    // bad
+    isNaN('1.2'); // false
+    isNaN('1.2.3'); // true
+
+    // good
+    Number.isNaN('1.2.3'); // false
+    Number.isNaN(Number('1.2.3')); // true
+    ```
+
+  <a name="standard-library--isfinite"></a>
+  - [29.2](#standard-library--isfinite) Use `Number.isFinite` instead of global `isFinite`.
+    eslint: [`no-restricted-globals`](https://eslint.org/docs/rules/no-restricted-globals)
+
+    > Why? The global `isFinite` coerces non-numbers to numbers, returning true for anything that coerces to a finite number.
+    > If this behavior is desired, make it explicit.
+
+    ```javascript
+    // bad
+    isFinite('2e3'); // true
+
+    // good
+    Number.isFinite('2e3'); // false
+    Number.isFinite(parseInt('2e3', 10)); // true
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Testing
+
+  <a name="testing--yup"></a><a name="30.1"></a>
+  - [30.1](#testing--yup) **Yup.**
 
     ```javascript
     function foo() {
@@ -3278,13 +3759,12 @@
     }
     ```
 
-  <a name="testing--for-real"></a><a name="28.2"></a>
-
-  - [29.2](#testing--for-real) **不， 这会有严重的后果。**:
+  <a name="testing--for-real"></a><a name="30.2"></a>
+  - [30.2](#testing--for-real) **不， 这会有严重的后果。**:
    - 无论你使用哪个测试框架，你都应该编写测试！
    - 尽量编写为一个个小的纯函数，同时减少突变。
    - Be cautious about stubs and mocks - 你的测试会因此而变得脆弱。
-   - 在Airbnb我们主要使用[`mocha`](https://www.npmjs.com/package/mocha)。偶尔会在小且分离的模块上使用[`tape`](https://www.npmjs.com/package/tape)。
+   - 在Airbnb我们主要使用[`mocha`](https://www.npmjs.com/package/mocha)和[`test`](https://www.npmjs.com/package/jest)。偶尔会在小且分离的模块上使用[`tape`](https://www.npmjs.com/package/tape)。
    - 争取100%测试覆盖率是一个很好的目标，即使它不是总能达到。
    - 每当你修复一个bug，_写一个回归测试_。一个没有测试的bug，迟早会重现。
 
@@ -3308,7 +3788,7 @@
 
 **学习 ES6**
 
-  - [Draft ECMA 2015 (ES6) Spec](https://people.mozilla.org/~jorendorff/es6-draft.html)
+  - [Latest ECMA spec](https://tc39.github.io/ecma262/)
   - [ExploringJS](http://exploringjs.com/)
   - [ES6 Compatibility Table](https://kangax.github.io/compat-table/es6/)
   - [Comprehensive Overview of ES6 Features](http://es6-features.org/)
@@ -3322,14 +3802,14 @@
   - 代码风格检查
     - [ESlint](http://eslint.org/) - [Airbnb Style .eslintrc](https://github.com/airbnb/javascript/blob/master/linters/.eslintrc)
     - [JSHint](http://jshint.com/) - [Airbnb Style .jshintrc](https://github.com/airbnb/javascript/blob/master/linters/.jshintrc)
-    - [JSCS](https://github.com/jscs-dev/node-jscs) - [Airbnb Style Preset](https://github.com/jscs-dev/node-jscs/blob/master/presets/airbnb.json) (Deprecated, please use [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base))
-  - Neutrino preset - [neutrino-preset-airbnb-base](https://neutrino.js.org/presets/neutrino-preset-airbnb-base/)
+  - Neutrino Preset - [@neutrinojs/airbnb](https://neutrinojs.org/packages/airbnb/)
 
 **其他风格指南**
 
   - [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
   - [jQuery Core Style Guidelines](https://contribute.jquery.org/style-guide/js/)
   - [Principles of Writing Consistent, Idiomatic JavaScript](https://github.com/rwaldron/idiomatic.js)
+  - [StandardJS](https://standardjs.com)
 
 **其他风格**
 
@@ -3375,7 +3855,6 @@
   - [Perfection Kills](http://perfectionkills.com/)
   - [Ben Alman](http://benalman.com/)
   - [Dmitry Baranovskiy](http://dmitry.baranovskiy.com/)
-  - [Dustin Diaz](http://dustindiaz.com/)
   - [nettuts](http://code.tutsplus.com/?s=javascript)
 
 **播客**
@@ -3389,7 +3868,8 @@
 
   这是使用了这个风格指南的列表，发送一个拉取请求，我们会把你添加到这个列表中。
 
-  - **3blades**: [3Blades/javascript](https://github.com/3blades/javascript)
+  - **123erfasst**: [123erfasst/javascript](https://github.com/123erfasst/javascript)
+  - **3blades**: [3Blades](https://github.com/3blades)
   - **4Catalyzer**: [4Catalyzer/javascript](https://github.com/4Catalyzer/javascript)
   - **Aan Zee**: [AanZee/javascript](https://github.com/AanZee/javascript)
   - **Adult Swim**: [adult-swim/javascript](https://github.com/adult-swim/javascript)
@@ -3402,16 +3882,18 @@
   - **Axept**: [axept/javascript](https://github.com/axept/javascript)
   - **BashPros**: [BashPros/javascript](https://github.com/BashPros/javascript)
   - **Billabong**: [billabong/javascript](https://github.com/billabong/javascript)
-  - **Bisk**: [bisk/javascript](https://github.com/Bisk/javascript/)
+  - **Bisk**: [bisk](https://github.com/Bisk/)
   - **Bonhomme**: [bonhommeparis/javascript](https://github.com/bonhommeparis/javascript)
   - **Brainshark**: [brainshark/javascript](https://github.com/brainshark/javascript)
   - **CaseNine**: [CaseNine/javascript](https://github.com/CaseNine/javascript)
+  - **Cerner**: [Cerner](https://github.com/cerner/)
   - **Chartboost**: [ChartBoost/javascript-style-guide](https://github.com/ChartBoost/javascript-style-guide)
   - **ComparaOnline**: [comparaonline/javascript](https://github.com/comparaonline/javascript-style-guide)
   - **Compass Learning**: [compasslearning/javascript-style-guide](https://github.com/compasslearning/javascript-style-guide)
   - **DailyMotion**: [dailymotion/javascript](https://github.com/dailymotion/javascript)
   - **DoSomething**: [DoSomething/eslint-config](https://github.com/DoSomething/eslint-config)
   - **Digitpaint** [digitpaint/javascript](https://github.com/digitpaint/javascript)
+  - **Drupal**: [www.drupal.org](https://www.drupal.org/project/drupal)
   - **Ecosia**: [ecosia/javascript](https://github.com/ecosia/javascript)
   - **Evernote**: [evernote/javascript-style-guide](https://github.com/evernote/javascript-style-guide)
   - **Evolution Gaming**: [evolution-gaming/javascript](https://github.com/evolution-gaming/javascript)
@@ -3419,22 +3901,26 @@
   - **ExactTarget**: [ExactTarget/javascript](https://github.com/ExactTarget/javascript)
   - **Expensify** [Expensify/Style-Guide](https://github.com/Expensify/Style-Guide/blob/master/javascript.md)
   - **Flexberry**: [Flexberry/javascript-style-guide](https://github.com/Flexberry/javascript-style-guide)
-  - **Gawker Media**: [gawkermedia/javascript](https://github.com/gawkermedia/javascript)
+  - **Gawker Media**: [gawkermedia](https://github.com/gawkermedia/)
   - **General Electric**: [GeneralElectric/javascript](https://github.com/GeneralElectric/javascript)
   - **Generation Tux**: [GenerationTux/javascript](https://github.com/generationtux/styleguide)
   - **GoodData**: [gooddata/gdc-js-style](https://github.com/gooddata/gdc-js-style)
+  - **GreenChef**: [greenchef/javascript](https://github.com/greenchef/javascript)
   - **Grooveshark**: [grooveshark/javascript](https://github.com/grooveshark/javascript)
+  - **Grupo-Abraxas**: [Grupo-Abraxas/javascript](https://github.com/Grupo-Abraxas/javascript)
   - **Honey**: [honeyscience/javascript](https://github.com/honeyscience/javascript)
   - **How About We**: [howaboutwe/javascript](https://github.com/howaboutwe/javascript-style-guide)
-  - **Huballin**: [huballin/javascript](https://github.com/huballin/javascript)
+  - **Huballin**: [huballin](https://github.com/huballin/)
   - **HubSpot**: [HubSpot/javascript](https://github.com/HubSpot/javascript)
   - **Hyper**: [hyperoslo/javascript-playbook](https://github.com/hyperoslo/javascript-playbook/blob/master/style.md)
   - **InterCity Group**: [intercitygroup/javascript-style-guide](https://github.com/intercitygroup/javascript-style-guide)
   - **Jam3**: [Jam3/Javascript-Code-Conventions](https://github.com/Jam3/Javascript-Code-Conventions)
   - **JeopardyBot**: [kesne/jeopardy-bot](https://github.com/kesne/jeopardy-bot/blob/master/STYLEGUIDE.md)
   - **JSSolutions**: [JSSolutions/javascript](https://github.com/JSSolutions/javascript)
-  - **KickorStick**: [kickorstick/javascript](https://github.com/kickorstick/javascript)
+  - **Kaplan Komputing**: [kaplankomputing/javascript](https://github.com/kaplankomputing/javascript)
+  - **KickorStick**: [kickorstick](https://github.com/kickorstick/)
   - **Kinetica Solutions**: [kinetica/javascript](https://github.com/kinetica/Javascript-style-guide)
+  - **LEINWAND**: [LEINWAND/javascript](https://github.com/LEINWAND/javascript)
   - **Lonely Planet**: [lonelyplanet/javascript](https://github.com/lonelyplanet/javascript)
   - **M2GEN**: [M2GEN/javascript](https://github.com/M2GEN/javascript)
   - **Mighty Spring**: [mightyspring/javascript](https://github.com/mightyspring/javascript)
@@ -3442,23 +3928,27 @@
   - **MitocGroup**: [MitocGroup/javascript](https://github.com/MitocGroup/javascript)
   - **ModCloth**: [modcloth/javascript](https://github.com/modcloth/javascript)
   - **Money Advice Service**: [moneyadviceservice/javascript](https://github.com/moneyadviceservice/javascript)
-  - **Muber**: [muber/javascript](https://github.com/muber/javascript)
-  - **National Geographic**: [natgeo/javascript](https://github.com/natgeo/javascript)
+  - **Muber**: [muber](https://github.com/muber/)
+  - **National Geographic**: [natgeo](https://github.com/natgeo/)
   - **Nimbl3**: [nimbl3/javascript](https://github.com/nimbl3/javascript)
+  - **NullDev**: [NullDevCo/JavaScript-Styleguide](https://github.com/NullDevCo/JavaScript-Styleguide)
   - **Nulogy**: [nulogy/javascript](https://github.com/nulogy/javascript)
   - **Orange Hill Development**: [orangehill/javascript](https://github.com/orangehill/javascript)
   - **Orion Health**: [orionhealth/javascript](https://github.com/orionhealth/javascript)
   - **OutBoxSoft**: [OutBoxSoft/javascript](https://github.com/OutBoxSoft/javascript)
   - **Peerby**: [Peerby/javascript](https://github.com/Peerby/javascript)
+  - **Pier 1**: [Pier1/javascript](https://github.com/pier1/javascript)
+  - **Qotto**: [Qotto/javascript-style-guide](https://github.com/Qotto/javascript-style-guide)
   - **Razorfish**: [razorfish/javascript-style-guide](https://github.com/razorfish/javascript-style-guide)
   - **reddit**: [reddit/styleguide/javascript](https://github.com/reddit/styleguide/tree/master/javascript)
   - **React**: [facebook.github.io/react/contributing/how-to-contribute.html#style-guide](https://facebook.github.io/react/contributing/how-to-contribute.html#style-guide)
-  - **REI**: [reidev/js-style-guide](https://github.com/rei/code-style-guides/blob/master/docs/javascript.md)
+  - **REI**: [reidev/js-style-guide](https://github.com/rei/code-style-guides/)
   - **Ripple**: [ripple/javascript-style-guide](https://github.com/ripple/javascript-style-guide)
+  - **Sainsbury’s Supermarkets**: [jsainsburyplc](https://github.com/jsainsburyplc)
   - **SeekingAlpha**: [seekingalpha/javascript-style-guide](https://github.com/seekingalpha/javascript-style-guide)
   - **Shutterfly**: [shutterfly/javascript](https://github.com/shutterfly/javascript)
   - **Sourcetoad**: [sourcetoad/javascript](https://github.com/sourcetoad/javascript)
-  - **Springload**: [springload/javascript](https://github.com/springload/javascript)
+  - **Springload**: [springload](https://github.com/springload/)
   - **StratoDem Analytics**: [stratodem/javascript](https://github.com/stratodem/javascript)
   - **SteelKiwi Development**: [steelkiwi/javascript](https://github.com/steelkiwi/javascript)
   - **StudentSphere**: [studentsphere/javascript](https://github.com/studentsphere/guide-javascript)
@@ -3469,6 +3959,7 @@
   - **TheLadders**: [TheLadders/javascript](https://github.com/TheLadders/javascript)
   - **The Nerdery**: [thenerdery/javascript-standards](https://github.com/thenerdery/javascript-standards)
   - **T4R Technology**: [T4R-Technology/javascript](https://github.com/T4R-Technology/javascript)
+  - **UrbanSim**: [urbansim](https://github.com/urbansim/)
   - **VoxFeed**: [VoxFeed/javascript-style-guide](https://github.com/VoxFeed/javascript-style-guide)
   - **WeBox Studio**: [weboxstudio/javascript](https://github.com/weboxstudio/javascript)
   - **Weggo**: [Weggo/javascript](https://github.com/Weggo/javascript)
@@ -3514,7 +4005,7 @@
 
 (The MIT License)
 
-Copyright (c) 2014-2017 Airbnb
+Copyright (c) 2012 Airbnb
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
