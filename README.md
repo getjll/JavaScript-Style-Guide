@@ -563,27 +563,27 @@
   - [5.3](#destructuring--object-over-array) 使用对象而非数组解构处理多个返回值。jscs: [`disallowArrayDestructuringReturn`](http://jscs.info/rule/disallowArrayDestructuringReturn)
   使用对象而非数组解构处理多个返回值。
 
-    > 为什么? 在你添加先的属性时，不改变原有顺序。
+  > 为什么? 在你添加先的属性时，不改变原有顺序。
 
-    ```javascript
-    // 糟糕的
-    function processInput(input) {
-      // 见证奇迹的时刻
-      return [left, right, top, bottom];
-    }
+  ```javascript
+  // 糟糕的
+  function processInput(input) {
+    // 见证奇迹的时刻
+    return [left, right, top, bottom];
+  }
 
-    // 调用方需要考虑返回的顺序
-    const [left, __, top] = processInput(input);
+  // 调用方需要考虑返回的顺序
+  const [left, __, top] = processInput(input);
 
-    // 好
-    function processInput(input) {
-      // 见证奇迹的时刻
-      return { left, right, top, bottom };
-    }
+  // 好
+  function processInput(input) {
+    // 见证奇迹的时刻
+    return { left, right, top, bottom };
+  }
 
-    // 不需要关心顺序
-    const { left, top } = processInput(input);
-    ```
+  // 不需要关心顺序
+  const { left, top } = processInput(input);
+  ```
 
 **[⬆ 回到目录](#table-of-contents)**
 
